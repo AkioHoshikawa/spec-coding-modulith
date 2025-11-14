@@ -1,0 +1,72 @@
+---
+id: get-shipments
+title: "出荷一覧取得"
+description: "出荷一覧を取得します。管理者は全出荷、一般ユーザーは自分の注文の出荷のみ取得できます。"
+sidebar_label: "出荷一覧取得"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/openapi/fashion-ec-order-to-shipment-platform-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"出荷一覧取得"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/shipments"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+出荷一覧を取得します。管理者は全出荷、一般ユーザーは自分の注文の出荷のみ取得できます。
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"page","in":"query","description":"ページ番号（1から始まる）","required":false,"schema":{"type":"integer","minimum":1,"default":1},"example":1},{"name":"pageSize","in":"query","description":"1ページあたりのアイテム数","required":false,"schema":{"type":"integer","minimum":1,"maximum":100,"default":20},"example":20},{"name":"orderId","in":"query","description":"注文IDでフィルタ","required":false,"schema":{"type":"string","format":"uuid"},"example":"770e8400-e29b-41d4-a716-446655440000"},{"name":"status","in":"query","description":"ステータスでフィルタ","required":false,"schema":{"type":"string","enum":["PREPARING","SHIPPED","IN_TRANSIT","OUT_FOR_DELIVERY","DELIVERED","FAILED","RETURNED"]},"example":"SHIPPED"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"出荷一覧取得成功","content":{"application/json":{"schema":{"type":"object","properties":{"data":{"type":"array","items":{"type":"object","required":["shipmentId","orderId","status","shippingAddress"],"properties":{"shipmentId":{"type":"string","format":"uuid","description":"出荷ID","example":"ff0e8400-e29b-41d4-a716-446655440000"},"orderId":{"type":"string","format":"uuid","description":"注文ID","example":"770e8400-e29b-41d4-a716-446655440000"},"trackingNumber":{"type":"string","description":"追跡番号","example":"1234567890"},"carrier":{"type":"string","description":"配送業者","example":"ヤマト運輸"},"carrierCode":{"type":"string","description":"配送業者コード","example":"YAMATO"},"status":{"type":"string","enum":["PREPARING","SHIPPED","IN_TRANSIT","OUT_FOR_DELIVERY","DELIVERED","FAILED","RETURNED"],"description":"出荷ステータス","example":"IN_TRANSIT"},"shippingAddress":{"type":"object","required":["addressId","firstName","lastName","postalCode","prefecture","city","addressLine1"],"properties":{"addressId":{"type":"string","format":"uuid","description":"住所ID","example":"660f9511-f3ac-52e5-b827-557766551111"},"firstName":{"type":"string","description":"名","example":"太郎"},"lastName":{"type":"string","description":"姓","example":"山田"},"phoneNumber":{"type":"string","description":"電話番号","example":"090-1234-5678"},"postalCode":{"type":"string","description":"郵便番号","example":"100-0001"},"prefecture":{"type":"string","description":"都道府県","example":"東京都"},"city":{"type":"string","description":"市区町村","example":"千代田区"},"addressLine1":{"type":"string","description":"住所1（町名・番地）","example":"丸の内1-1-1"},"addressLine2":{"type":"string","description":"住所2（建物名・部屋番号）","example":"丸の内ビル 10F"},"isDefault":{"type":"boolean","description":"デフォルト住所か","example":true},"createdAt":{"type":"string","format":"date-time","example":"2025-01-15T09:00:00Z"},"updatedAt":{"type":"string","format":"date-time","example":"2025-11-12T10:30:00Z"}},"title":"Address"},"estimatedDeliveryDate":{"type":"string","format":"date","description":"配送予定日","example":"2025-11-15"},"actualDeliveryDate":{"type":"string","format":"date","description":"実際の配送日","example":"2025-11-14"},"shippedAt":{"type":"string","format":"date-time","description":"出荷日時","example":"2025-11-13T09:00:00Z"},"deliveredAt":{"type":"string","format":"date-time","description":"配送完了日時","example":"2025-11-14T15:30:00Z"},"items":{"type":"array","description":"出荷商品","items":{"type":"object","properties":{"skuId":{"type":"string","example":"SKU-JACKET-M-BLACK"},"productName":{"type":"string","example":"レザージャケット"},"quantity":{"type":"integer","example":2}}}},"createdAt":{"type":"string","format":"date-time","example":"2025-11-12T18:00:00Z"},"updatedAt":{"type":"string","format":"date-time","example":"2025-11-14T15:30:00Z"}},"title":"Shipment"}},"meta":{"type":"object","required":["page","pageSize","totalItems","totalPages"],"properties":{"page":{"type":"integer","minimum":1,"description":"現在のページ番号","example":1},"pageSize":{"type":"integer","minimum":1,"maximum":100,"description":"1ページあたりのアイテム数","example":20},"totalItems":{"type":"integer","minimum":0,"description":"総アイテム数","example":150},"totalPages":{"type":"integer","minimum":0,"description":"総ページ数","example":8},"hasNext":{"type":"boolean","description":"次のページが存在するか","example":true},"hasPrevious":{"type":"boolean","description":"前のページが存在するか","example":false}},"title":"PaginationMeta"}}}}}},"401":{"description":"認証が必要です","content":{"application/json":{"schema":{"type":"object","required":["code","message","timestamp","path"],"properties":{"code":{"type":"string","description":"エラーコード","example":"ORDER_001"},"message":{"type":"string","description":"エラーメッセージ","example":"注文が見つかりません"},"timestamp":{"type":"string","format":"date-time","description":"エラー発生時刻","example":"2025-11-12T10:30:00Z"},"path":{"type":"string","description":"リクエストパス","example":"/v1/orders/123"},"details":{"type":"array","description":"エラー詳細情報（バリデーションエラーなど）","items":{"type":"object","properties":{"field":{"type":"string","description":"エラーが発生したフィールド","example":"email"},"message":{"type":"string","description":"フィールド固有のエラーメッセージ","example":"有効なメールアドレスを入力してください"},"code":{"type":"string","description":"フィールド固有のエラーコード","example":"INVALID_EMAIL_FORMAT"}}}},"traceId":{"type":"string","description":"トレースID（デバッグ用）","example":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}},"title":"ErrorResponse"},"example":{"code":"UNAUTHORIZED","message":"認証が必要です。ログインしてください","timestamp":"2025-11-12T10:30:00Z","path":"/v1/orders","traceId":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}}}},"500":{"description":"サーバー内部エラー","content":{"application/json":{"schema":{"type":"object","required":["code","message","timestamp","path"],"properties":{"code":{"type":"string","description":"エラーコード","example":"ORDER_001"},"message":{"type":"string","description":"エラーメッセージ","example":"注文が見つかりません"},"timestamp":{"type":"string","format":"date-time","description":"エラー発生時刻","example":"2025-11-12T10:30:00Z"},"path":{"type":"string","description":"リクエストパス","example":"/v1/orders/123"},"details":{"type":"array","description":"エラー詳細情報（バリデーションエラーなど）","items":{"type":"object","properties":{"field":{"type":"string","description":"エラーが発生したフィールド","example":"email"},"message":{"type":"string","description":"フィールド固有のエラーメッセージ","example":"有効なメールアドレスを入力してください"},"code":{"type":"string","description":"フィールド固有のエラーコード","example":"INVALID_EMAIL_FORMAT"}}}},"traceId":{"type":"string","description":"トレースID（デバッグ用）","example":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}},"title":"ErrorResponse"},"example":{"code":"INTERNAL_SERVER_ERROR","message":"サーバーエラーが発生しました","timestamp":"2025-11-12T10:30:00Z","path":"/v1/orders","traceId":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

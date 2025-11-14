@@ -1,0 +1,222 @@
+---
+id: fashion-ec-order-to-shipment-platform-api
+title: "Fashion EC Order-to-Shipment Platform API"
+description: "# ファッションECの受注〜出荷プラットフォーム API"
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span
+  className={"theme-doc-version-badge badge badge--secondary"}
+  children={"Version: 1.0.0"}
+>
+</span>
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Fashion EC Order-to-Shipment Platform API"}
+>
+</Heading>
+
+
+
+# ファッションECの受注〜出荷プラットフォーム API
+
+このAPIは、ファッションEコマースプラットフォームの受注から出荷までの
+プロセスを管理するためのRESTful APIです。
+
+## 主な機能
+
+- **認証・認可**: OAuth 2.0 / OpenID Connect対応
+- **ユーザー管理**: プロフィール、住所管理、注文履歴
+- **商品カタログ**: 商品検索、詳細情報、在庫確認
+- **カート管理**: カート操作、商品追加/削除
+- **注文処理**: 注文確定、ステータス管理、キャンセル
+- **在庫管理**: リアルタイム在庫引当、ロック機構
+- **プロモーション**: セール、クーポン、タイムセール、予約販売
+- **出荷管理**: 出荷指示、配送追跡、3PL連携
+- **返品・交換**: 返品申請、ステータス管理、返金処理
+
+## レート制限
+
+- 認証済みユーザー: 1000リクエスト/分
+- 未認証: 100リクエスト/分
+
+## エラーハンドリング
+
+すべてのエラーレスポンスは統一されたフォーマットを使用します。
+詳細は `ErrorResponse` スキーマを参照してください。
+
+
+<div
+  style={{"marginBottom":"2rem"}}
+>
+  <Heading
+    id={"authentication"}
+    as={"h2"}
+    className={"openapi-tabs__heading"}
+    children={"Authentication"}
+  >
+  </Heading><SchemaTabs
+    className={"openapi-tabs__security-schemes"}
+  >
+    <TabItem
+      label={"HTTP: Bearer Auth"}
+      value={"bearerAuth"}
+    >
+      
+      
+      JWT Bearer Token authentication.
+      
+      トークンを取得するには `/auth/login` エンドポイントを使用してください。
+      
+      Example:
+      ```
+      Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+      ```
+      
+      
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Security Scheme Type:
+              </th><td>
+                http
+              </td>
+            </tr><tr>
+              <th>
+                HTTP Authorization Scheme:
+              </th><td>
+                bearer
+              </td>
+            </tr><tr>
+              <th>
+                Bearer format:
+              </th><td>
+                JWT
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem><TabItem
+      label={"OAuth 2.0: oauth2"}
+      value={"oauth2"}
+    >
+      
+      
+      OAuth 2.0 認証フロー（オプション）
+      
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Security Scheme Type:
+              </th><td>
+                oauth2
+              </td>
+            </tr><tr>
+              <th>
+                OAuth Flow (authorizationCode):
+              </th><td>
+                <div>
+                  Token URL: https://auth.example.com/oauth/token
+                </div><div>
+                  Authorization URL: https://auth.example.com/oauth/authorize
+                </div><div>
+                  Refresh URL: https://auth.example.com/oauth/refresh
+                </div><span>
+                  Scopes:
+                </span><ul>
+                  <li>
+                    read:profile: プロフィール情報の読み取り
+                  </li><li>
+                    write:profile: プロフィール情報の更新
+                  </li><li>
+                    read:orders: 注文情報の読み取り
+                  </li><li>
+                    write:orders: 注文の作成・更新
+                  </li><li>
+                    read:cart: カート情報の読み取り
+                  </li><li>
+                    write:cart: カートの操作
+                  </li><li>
+                    admin:inventory: 在庫管理（管理者のみ）
+                  </li><li>
+                    admin:promotions: プロモーション管理（管理者のみ）
+                  </li><li>
+                    admin:orders: すべての注文管理（管理者のみ）
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem><TabItem
+      label={"API Key: apiKey"}
+      value={"apiKey"}
+    >
+      
+      
+      サーバー間通信用のAPIキー（3PL連携などで使用）
+      
+      Example:
+      ```
+      X-API-Key: your-api-key-here
+      ```
+      
+      
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Security Scheme Type:
+              </th><td>
+                apiKey
+              </td>
+            </tr><tr>
+              <th>
+                Header parameter name:
+              </th><td>
+                X-API-Key
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+  </SchemaTabs>
+</div><div
+  style={{"display":"flex","flexDirection":"column","marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    Contact
+  </h3><span>
+    API Support: [api-support@example.com](mailto:api-support@example.com)
+  </span>
+</div><div
+  style={{"marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    License
+  </h3>
+</div>
+      

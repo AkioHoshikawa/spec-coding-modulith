@@ -1,0 +1,72 @@
+---
+id: get-products
+title: "商品一覧取得"
+description: "商品一覧を取得します。フィルタリング、ソート、ページネーションが可能です。"
+sidebar_label: "商品一覧取得"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/openapi/fashion-ec-order-to-shipment-platform-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"商品一覧取得"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/products"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+商品一覧を取得します。フィルタリング、ソート、ページネーションが可能です。
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"page","in":"query","description":"ページ番号（1から始まる）","required":false,"schema":{"type":"integer","minimum":1,"default":1},"example":1},{"name":"pageSize","in":"query","description":"1ページあたりのアイテム数","required":false,"schema":{"type":"integer","minimum":1,"maximum":100,"default":20},"example":20},{"name":"sort","in":"query","description":"ソート順を指定（カンマ区切りで複数指定可能）\n\nフォーマット: `field:order`\n- order: `asc` (昇順) または `desc` (降順)\n\n例:\n- `createdAt:desc` - 作成日時の降順\n- `price:asc,name:asc` - 価格の昇順、次に名前の昇順\n","required":false,"schema":{"type":"string"},"example":"createdAt:desc"},{"name":"category","in":"query","description":"カテゴリでフィルタ","required":false,"schema":{"type":"string"},"example":"アウター"},{"name":"brand","in":"query","description":"ブランドでフィルタ","required":false,"schema":{"type":"string"},"example":"Premium Fashion"},{"name":"minPrice","in":"query","description":"最低価格","required":false,"schema":{"type":"number","format":"decimal"},"example":10000},{"name":"maxPrice","in":"query","description":"最高価格","required":false,"schema":{"type":"number","format":"decimal"},"example":50000}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"商品一覧取得成功","content":{"application/json":{"schema":{"type":"object","properties":{"data":{"type":"array","items":{"type":"object","required":["productId","name","category","price","currency","status"],"properties":{"productId":{"type":"string","format":"uuid","description":"商品ID","example":"990e8400-e29b-41d4-a716-446655440000"},"name":{"type":"string","description":"商品名","example":"レザージャケット"},"description":{"type":"string","description":"商品説明","example":"高品質な本革を使用したジャケットです"},"category":{"type":"string","description":"カテゴリ","example":"アウター"},"brand":{"type":"string","description":"ブランド","example":"Premium Fashion"},"price":{"type":"number","format":"decimal","description":"価格（税抜）","example":29800},"currency":{"type":"string","description":"通貨コード","example":"JPY"},"images":{"type":"array","description":"商品画像URL","items":{"type":"string","format":"uri"},"example":["https://cdn.example.com/products/jacket-123-1.jpg","https://cdn.example.com/products/jacket-123-2.jpg"]},"status":{"type":"string","enum":["ACTIVE","INACTIVE","OUT_OF_STOCK"],"description":"商品ステータス","example":"ACTIVE"},"availableSkus":{"type":"array","description":"利用可能なSKU一覧","items":{"type":"object","required":["skuId","productId","price","stockQuantity"],"properties":{"skuId":{"type":"string","description":"SKU ID","example":"SKU-JACKET-M-BLACK"},"productId":{"type":"string","format":"uuid","description":"商品ID","example":"990e8400-e29b-41d4-a716-446655440000"},"size":{"type":"string","description":"サイズ","example":"M"},"color":{"type":"string","description":"カラー","example":"ブラック"},"price":{"type":"number","format":"decimal","description":"価格（税抜）","example":29800},"stockQuantity":{"type":"integer","minimum":0,"description":"在庫数","example":10},"reserved":{"type":"integer","minimum":0,"description":"引当済み数量","example":2},"available":{"type":"integer","minimum":0,"description":"利用可能在庫数","example":8},"imageUrl":{"type":"string","format":"uri","description":"SKU固有の画像URL","example":"https://cdn.example.com/skus/jacket-m-black.jpg"}},"title":"SKU"}},"createdAt":{"type":"string","format":"date-time","example":"2025-01-01T00:00:00Z"},"updatedAt":{"type":"string","format":"date-time","example":"2025-11-12T10:00:00Z"}},"title":"Product"}},"meta":{"type":"object","required":["page","pageSize","totalItems","totalPages"],"properties":{"page":{"type":"integer","minimum":1,"description":"現在のページ番号","example":1},"pageSize":{"type":"integer","minimum":1,"maximum":100,"description":"1ページあたりのアイテム数","example":20},"totalItems":{"type":"integer","minimum":0,"description":"総アイテム数","example":150},"totalPages":{"type":"integer","minimum":0,"description":"総ページ数","example":8},"hasNext":{"type":"boolean","description":"次のページが存在するか","example":true},"hasPrevious":{"type":"boolean","description":"前のページが存在するか","example":false}},"title":"PaginationMeta"}}}}}},"400":{"description":"リクエストが不正です","content":{"application/json":{"schema":{"type":"object","required":["code","message","timestamp","path"],"properties":{"code":{"type":"string","description":"エラーコード","example":"ORDER_001"},"message":{"type":"string","description":"エラーメッセージ","example":"注文が見つかりません"},"timestamp":{"type":"string","format":"date-time","description":"エラー発生時刻","example":"2025-11-12T10:30:00Z"},"path":{"type":"string","description":"リクエストパス","example":"/v1/orders/123"},"details":{"type":"array","description":"エラー詳細情報（バリデーションエラーなど）","items":{"type":"object","properties":{"field":{"type":"string","description":"エラーが発生したフィールド","example":"email"},"message":{"type":"string","description":"フィールド固有のエラーメッセージ","example":"有効なメールアドレスを入力してください"},"code":{"type":"string","description":"フィールド固有のエラーコード","example":"INVALID_EMAIL_FORMAT"}}}},"traceId":{"type":"string","description":"トレースID（デバッグ用）","example":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}},"title":"ErrorResponse"},"example":{"code":"BAD_REQUEST","message":"リクエストパラメータが不正です","timestamp":"2025-11-12T10:30:00Z","path":"/v1/orders","details":[{"field":"quantity","message":"数量は1以上である必要があります","code":"INVALID_QUANTITY"}],"traceId":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}}}},"500":{"description":"サーバー内部エラー","content":{"application/json":{"schema":{"type":"object","required":["code","message","timestamp","path"],"properties":{"code":{"type":"string","description":"エラーコード","example":"ORDER_001"},"message":{"type":"string","description":"エラーメッセージ","example":"注文が見つかりません"},"timestamp":{"type":"string","format":"date-time","description":"エラー発生時刻","example":"2025-11-12T10:30:00Z"},"path":{"type":"string","description":"リクエストパス","example":"/v1/orders/123"},"details":{"type":"array","description":"エラー詳細情報（バリデーションエラーなど）","items":{"type":"object","properties":{"field":{"type":"string","description":"エラーが発生したフィールド","example":"email"},"message":{"type":"string","description":"フィールド固有のエラーメッセージ","example":"有効なメールアドレスを入力してください"},"code":{"type":"string","description":"フィールド固有のエラーコード","example":"INVALID_EMAIL_FORMAT"}}}},"traceId":{"type":"string","description":"トレースID（デバッグ用）","example":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}},"title":"ErrorResponse"},"example":{"code":"INTERNAL_SERVER_ERROR","message":"サーバーエラーが発生しました","timestamp":"2025-11-12T10:30:00Z","path":"/v1/orders","traceId":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

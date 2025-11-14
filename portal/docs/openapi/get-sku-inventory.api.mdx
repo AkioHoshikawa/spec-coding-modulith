@@ -1,0 +1,72 @@
+---
+id: get-sku-inventory
+title: "SKU在庫取得"
+description: "指定されたSKUの在庫情報を取得します（管理者権限が必要）。"
+sidebar_label: "SKU在庫取得"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWttXE0ka/1dyypddT0IS1FnN00aIMxGHsAFmZkc5WiQF6SHp7unu4DCcnJPuHiSgHhgFPYzs4G2Uywg46Cg3+WOK7oQn/4Xdr6qTdEhQ9Ozug4cXSZdffffvV19dhpGG+1UUuoii4iARNUkZQj1elCRqQhFkTZBEFEL2jVFr+ReqT1PjBtXnOtu6qb5szc5bG0u2OWLdf06NW9bEHevNXarfpfobqs+83SoUlx8UJ6+V8iP2/MLezCTVb1g7I6Un+tutMZo3LonIiySZKBiERJMohPqJ1jmQrerhRSpJZBVBG0Khi8Ool2CFKOGslkKhiz25Hi+SsYIzRCOKyghEnCEohNSBbDSJvEgA1WWspZAXKeT7rKCQJAppSpbst6+zrdsTbQV5iRTJYBQaRtqQzHhpiiD2o5wXkR9wRk4TTu07H25pi3T5vvSdvRBuaUOgjEJUWRJVosL05kAA/tSKcXuMu8suTFrjc8iLEpKoEVGDOViW00KCecX/nQoTh+v1knq/IwmtxrCLFcM1ScPpf2SxqIHrmGZEGSRJ1xAexEIa96ZJZQzcqUA8NIGbwLnVueJA373bQV50FSskJWVVchiuVn7M2ljax/frL3xdsbZ/xnyBIDCsNbPKUhA10k8U5EUZQRQy2QwKBfbzL76acKIxveqWEQwEcg0c9mHMdzcKxRc/2a8LVN+xp1f3RifcIppBQr3/P0yEVVgoTs1bEyslc7uhIadBior7iDbUqUmJgQ/lvzxmjcwf4KKcF2XlJNZIMqw1CmWfpGSw9h9HAI1PEzKkLr72bL740rDvvbDvrNp3f7NnjJpINweaT/mCQV+wuSsYCJ0IhAKBb1EOYi5ojKAKErkcjJ8MBOvrrbR4szS/VcEdqj+l+sx/q9gSUhLMyhBVxf3wC+xUNZyRkZejTl1FsSnvTX1qzFNzgZpb1FiDf82xGtfE4q2R+OUAL4Gy9A9gaj6gpkmNTSbgdQ1re23evjNK9RulJ9ep/pjq16kxzuD8HjVus5Kr2PhxYa+oUZzZKE7N2TOGVdg8ROQdj77fTHORGisgxVinZoGaP1NjvYa/fzDol5QkUVR/sPkEcE4SDQtp1cUcKwoeOlj30sJa8cUqh/G3WwVqToJYc5R59BU1n1JzrepvfZHqC2+3IIiCRjJqo7yqTZM+gaQPAZEuETe4O9niO0fNaWo8YqFe2p88JIOF9IclTi03696GPTtG9eXDJdTsmDW+Di4AIsbCeEjNMWr+DgEyblkjv1nj95jeT6g+QfX70GToP4GKh6yW9+rXsIqi7V+FL0RbL0e+DEcvXD4Xi38Z7nKgRFNw4lBrFEuw35mI9Wgry4RRlgwmNVaLU/M86FWZONjbnDiRPOkjp/o+8/3t9JmAD/cmkj7SF2w+cfLUZzBSA3IRRZGUuNNW1PQgZSxB3e3h7q4vYvHot5FWFxodgH00b1DzGTVWqfEYkrTe7zUl3rgYy7XoKiXk8tphzeSofaIetSFFoIY3qbFe6RypbtRg0RGIH4H4EYgfgfgnAeLnYvGz0dbWSHsNglP9NrgAimGb60f1JTc4AqAb198BkR8G5TiZEUS/4Np9fySmn2yA6TVWHABNR5h+hOlHmH6E6Z8EprfHui6fi3W313bl+w5SDwmLH9OS+8+cOfOxEH6q0eElNV6ycE1Sc8u6NrJnzlcieYTcR8h9hNxHyP1pIHe0vSsSbw9fuNwZiX8ViV+OxOOxeG1n7oLCA1LmDU+c/+t5CstBLSU5V2kuxpWm3q8OZFX/MLvaybH7NWWwfHuWVdIohFKaJqshvx/LQpPjm6aElPEPBuuC1aFIyWwCPjycD8p5G7DxqRruF8T+97Hr5GSNeYX8/rSUwOmUpGqh04HTgUYcLgCFJ0kGSVqSM0TUKrx6qleJnbAUcVRwXyhWMhOklW8C4ZsTIa/z41wZkc9/3VWnwPmvuzxnGZmnSxogogdntRQRNWc5bLokXhJZim8BpAKkVa5NYSsH+zt9xXPFD9P8aalfEK94WIKtsQr/l3NsZxaocWt3e6c4NV9f5+xq9ZIY4c4OXRKvXLlySQQjJUX4kekRKitJhs6nej9PCDHhfLT7x2iwXYiqUTF+KtES/Sw6IH/zVcv5M01NTQ4PKBcJVGt2Ay4f2O+JGAj0NDcFPM5BpDkNJ4/mFtS0sUjNuxVc5zXdl5ausqBgt6YtDmDVDHbXZlhWS9WkFtPIX57B2giIxaFmMUrWlfQpRE0dao5Dy3JGknlmKQQnQ7Ii9QkMdcBcsL6Kq861ub5cWnxG9R1r4g41xpEXXVUEjRxuJr88Y8riZMgBjnLH8W7++4ipvry7PWsXJqm5Wcs1gRWNAd4SE154N9v91KDk7Zu727Nw4QynC6Hq6UL5Npw/EnC/FoCVRt/hWcFnyYqUkSDyqssjD929wWG4VIyGYtPXWdkscwe8azoHViwLbcR9SesMOK8MUgQnGUg4TxC+8YU7oj5OcHAbvXfn9l7+l92dB6yQl8MdUWo4NXKi48Je/pE9ucGbHao/5fX+dmusQXVXxIU8Q1JW8QHqDpAhX4oopFK8OdC1T2I2OKvhOaymAL4jLZ4YeMenSb7OlMCxsyONNeg/PeGOaJ0ZxzwsJ3mf4gQh0gKvQibu2mvzND9rjW6Ubr5i0VoAKoC9aWrw/uY+MGVoyA65wHJ9heb1BkxZs/Grs0c6gFtVLvTXY45oWISfUn0ZMJflDD81M27xKJcxd44aOtWX45HOrr5s2sN0cS5LQMNjxzy7rzepvmgvzJXMbRjyeY4fL8PaZmnxpjWxcvx4yFPFPL8nJhMx2uppkUSRJDRr5Y21M8snUvMJM+ZPaNmZIjC3vs5pXt/dnrDH8o62eZ3nqvX8N/vZC87Lmr5m3dah3owdfrEDvPio/Xi2+OIhzevu3prmdafsHm6UFm86GpXr1aVOpeBZ/cI0xrS0s22N3/dbY+N7M4/5bEer0SfOVKeiHm7ARjevs6hdYxbvUGO9YgzL9EdsDdyk5pJjjwsSuFcWWXfL7IO17z6nsLamre3bLF+esWRZsRfm7KfXyx5ugBDcqs2Kb9kCvAVrqrnGPh0Bbhr+jqP0x4L16A9HQZZZVQX5t31jtPh4g+b1vZGbe3lwUunVA5rXK0XspMzOFETL3NzdeGxP3IP5fKg4tVZauv4OZ5V2pvZGf+Y+dnLSaZPNglX4c29mkqclT0r+8MSdZyFPMBAI7NvJ+a3CNZhkzy7yeYyqIRGXWN2eTJQ7kkUWwFVeyVVUdZGyXQn3MpxxrBRfPt99nXedgFSq+FenrmtamzflQuRZzNqjmh4eGqR1DpvAAhoqozjy9IC+CHkR9Lscw4JNgaaAc3aBE+zswoHvcEfU05mVZUmBLprv8Bjk+1Q++ndXGwBtUVpIENhQVFl0KJKsCETD7ImKF8mSqmWw6KLobOt2spm1gPshdrh6pvK/e3/nLGYa+UHzy2kssB6Pdd3DzubhInLfCMD2AXlRiL8N6/Ei6MeBaHi4F6ukW0nncjD8fZbAGn+xx4sGsSLAQye2x0gKKvxOolAfTqv73+G5Tf5L3DkY+qun8sKsobbl9VgE/QZxOgtfyIsGYLl2HrHlenLe8hoNavD/CycSRNZcs+pOrmDfUNlSfR6Bhh/X7hb27Q4Y94YaDQ9zCrYvyOUqCvKOM9eTy+X+DaIVudE=
+sidebar_class_name: "get api-method"
+info_path: docs/openapi/fashion-ec-order-to-shipment-platform-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"SKU在庫取得"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/inventory/skus/{skuId}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+指定されたSKUの在庫情報を取得します（管理者権限が必要）。
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"skuId","in":"path","required":true,"description":"SKU ID","schema":{"type":"string"},"example":"SKU-JACKET-M-BLACK"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"在庫情報取得成功","content":{"application/json":{"schema":{"type":"object","required":["skuId","totalQuantity","reservedQuantity","availableQuantity"],"properties":{"skuId":{"type":"string","description":"SKU ID","example":"SKU-JACKET-M-BLACK"},"warehouseId":{"type":"string","description":"倉庫ID","example":"WH-TOKYO-01"},"totalQuantity":{"type":"integer","minimum":0,"description":"総在庫数","example":100},"reservedQuantity":{"type":"integer","minimum":0,"description":"予約済み数量","example":20},"availableQuantity":{"type":"integer","minimum":0,"description":"利用可能在庫数","example":80},"safetyStock":{"type":"integer","minimum":0,"description":"安全在庫数","example":10},"updatedAt":{"type":"string","format":"date-time","description":"最終更新日時","example":"2025-11-12T10:30:00Z"}},"title":"Inventory"}}}},"401":{"description":"認証が必要です","content":{"application/json":{"schema":{"type":"object","required":["code","message","timestamp","path"],"properties":{"code":{"type":"string","description":"エラーコード","example":"ORDER_001"},"message":{"type":"string","description":"エラーメッセージ","example":"注文が見つかりません"},"timestamp":{"type":"string","format":"date-time","description":"エラー発生時刻","example":"2025-11-12T10:30:00Z"},"path":{"type":"string","description":"リクエストパス","example":"/v1/orders/123"},"details":{"type":"array","description":"エラー詳細情報（バリデーションエラーなど）","items":{"type":"object","properties":{"field":{"type":"string","description":"エラーが発生したフィールド","example":"email"},"message":{"type":"string","description":"フィールド固有のエラーメッセージ","example":"有効なメールアドレスを入力してください"},"code":{"type":"string","description":"フィールド固有のエラーコード","example":"INVALID_EMAIL_FORMAT"}}}},"traceId":{"type":"string","description":"トレースID（デバッグ用）","example":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}},"title":"ErrorResponse"},"example":{"code":"UNAUTHORIZED","message":"認証が必要です。ログインしてください","timestamp":"2025-11-12T10:30:00Z","path":"/v1/orders","traceId":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}}}},"403":{"description":"アクセス権限がありません","content":{"application/json":{"schema":{"type":"object","required":["code","message","timestamp","path"],"properties":{"code":{"type":"string","description":"エラーコード","example":"ORDER_001"},"message":{"type":"string","description":"エラーメッセージ","example":"注文が見つかりません"},"timestamp":{"type":"string","format":"date-time","description":"エラー発生時刻","example":"2025-11-12T10:30:00Z"},"path":{"type":"string","description":"リクエストパス","example":"/v1/orders/123"},"details":{"type":"array","description":"エラー詳細情報（バリデーションエラーなど）","items":{"type":"object","properties":{"field":{"type":"string","description":"エラーが発生したフィールド","example":"email"},"message":{"type":"string","description":"フィールド固有のエラーメッセージ","example":"有効なメールアドレスを入力してください"},"code":{"type":"string","description":"フィールド固有のエラーコード","example":"INVALID_EMAIL_FORMAT"}}}},"traceId":{"type":"string","description":"トレースID（デバッグ用）","example":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}},"title":"ErrorResponse"},"example":{"code":"FORBIDDEN","message":"このリソースにアクセスする権限がありません","timestamp":"2025-11-12T10:30:00Z","path":"/v1/admin/inventory","traceId":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}}}},"404":{"description":"リソースが見つかりません","content":{"application/json":{"schema":{"type":"object","required":["code","message","timestamp","path"],"properties":{"code":{"type":"string","description":"エラーコード","example":"ORDER_001"},"message":{"type":"string","description":"エラーメッセージ","example":"注文が見つかりません"},"timestamp":{"type":"string","format":"date-time","description":"エラー発生時刻","example":"2025-11-12T10:30:00Z"},"path":{"type":"string","description":"リクエストパス","example":"/v1/orders/123"},"details":{"type":"array","description":"エラー詳細情報（バリデーションエラーなど）","items":{"type":"object","properties":{"field":{"type":"string","description":"エラーが発生したフィールド","example":"email"},"message":{"type":"string","description":"フィールド固有のエラーメッセージ","example":"有効なメールアドレスを入力してください"},"code":{"type":"string","description":"フィールド固有のエラーコード","example":"INVALID_EMAIL_FORMAT"}}}},"traceId":{"type":"string","description":"トレースID（デバッグ用）","example":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}},"title":"ErrorResponse"},"example":{"code":"NOT_FOUND","message":"指定されたリソースが見つかりません","timestamp":"2025-11-12T10:30:00Z","path":"/v1/orders/999","traceId":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}}}},"500":{"description":"サーバー内部エラー","content":{"application/json":{"schema":{"type":"object","required":["code","message","timestamp","path"],"properties":{"code":{"type":"string","description":"エラーコード","example":"ORDER_001"},"message":{"type":"string","description":"エラーメッセージ","example":"注文が見つかりません"},"timestamp":{"type":"string","format":"date-time","description":"エラー発生時刻","example":"2025-11-12T10:30:00Z"},"path":{"type":"string","description":"リクエストパス","example":"/v1/orders/123"},"details":{"type":"array","description":"エラー詳細情報（バリデーションエラーなど）","items":{"type":"object","properties":{"field":{"type":"string","description":"エラーが発生したフィールド","example":"email"},"message":{"type":"string","description":"フィールド固有のエラーメッセージ","example":"有効なメールアドレスを入力してください"},"code":{"type":"string","description":"フィールド固有のエラーコード","example":"INVALID_EMAIL_FORMAT"}}}},"traceId":{"type":"string","description":"トレースID（デバッグ用）","example":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}},"title":"ErrorResponse"},"example":{"code":"INTERNAL_SERVER_ERROR","message":"サーバーエラーが発生しました","timestamp":"2025-11-12T10:30:00Z","path":"/v1/orders","traceId":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      
