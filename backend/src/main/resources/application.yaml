@@ -1,0 +1,35 @@
+logging:
+  level:
+    org:
+      springframework:
+        modulith: DEBUG
+spring:
+  application:
+    name: poc
+  datasource:
+    driverClassName: org.h2.Driver
+    password: ''
+    url: jdbc:h2:mem:testdb
+    username: sa
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  modulith:
+    detection-strategy: explicitly-annotated
+    documentation:
+      enabled: true
+    events:
+      externalization:
+        enabled: true
+      jdbc:
+        schema-initialization:
+          enabled: true
+      publication-registry:
+        enabled: true
+      republish-outstanding-events-on-restart: true
+      retention-policy: P30D
