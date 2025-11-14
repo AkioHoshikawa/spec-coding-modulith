@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-business-rule docs-version-current docs-doc-page docs-doc-id-BR-008_在庫負数防止ルール" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">BR-008: 在庫負数防止ルール | Spec-Coding Modulith</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://akiohoshikawa.github.io/spec-coding-modulith/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://akiohoshikawa.github.io/spec-coding-modulith/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://akiohoshikawa.github.io/spec-coding-modulith/docs/business-rule/BR-008_在庫負数防止ルール"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-business-rule-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-business-rule-current"><meta data-rh="true" property="og:title" content="BR-008: 在庫負数防止ルール | Spec-Coding Modulith"><meta data-rh="true" name="description" content="基本情報"><meta data-rh="true" property="og:description" content="基本情報"><link data-rh="true" rel="icon" href="/spec-coding-modulith/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://akiohoshikawa.github.io/spec-coding-modulith/docs/business-rule/BR-008_在庫負数防止ルール"><link data-rh="true" rel="alternate" href="https://akiohoshikawa.github.io/spec-coding-modulith/docs/business-rule/BR-008_在庫負数防止ルール" hreflang="en"><link data-rh="true" rel="alternate" href="https://akiohoshikawa.github.io/spec-coding-modulith/docs/business-rule/BR-008_在庫負数防止ルール" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"BR-008: 在庫負数防止ルール","item":"https://akiohoshikawa.github.io/spec-coding-modulith/docs/business-rule/BR-008_在庫負数防止ルール"}]}</script><link rel="stylesheet" href="/spec-coding-modulith/assets/css/styles.30cbf062.css">
+<script src="/spec-coding-modulith/assets/js/runtime~main.79f1005d.js" defer="defer"></script>
+<script src="/spec-coding-modulith/assets/js/main.a9654e8e.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/spec-coding-modulith/img/logo.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/spec-coding-modulith/"><div class="navbar__logo"><img src="/spec-coding-modulith/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/spec-coding-modulith/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Spec-Coding Modulith</b></a><a class="navbar__item navbar__link" href="/spec-coding-modulith/docs/overview/project-overview">Overview</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/spec-coding-modulith/docs/business-rule">Business Rule</a><a class="navbar__item navbar__link" href="/spec-coding-modulith/docs/user-story">User Story</a><a class="navbar__item navbar__link" href="/spec-coding-modulith/docs/openapi/fashion-ec-order-to-shipment-platform-api">OpenAPI</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/spec-coding-modulith/docs/business-rule/"><span title="ビジネスルール" class="linkLabel_WmDU">ビジネスルール</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/spec-coding-modulith/docs/business-rule/BR-001_在庫引当とロック機構"><span title="BR-001: 在庫引当とロック機構" class="linkLabel_WmDU">BR-001: 在庫引当とロック機構</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/spec-coding-modulith/docs/business-rule/BR-002_プロモーション優先度ルール"><span title="BR-002: プロモーション優先度ルール" class="linkLabel_WmDU">BR-002: プロモーション優先度ルール</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/spec-coding-modulith/docs/business-rule/BR-003_在庫競合制御"><span title="BR-003: 在庫競合制御" class="linkLabel_WmDU">BR-003: 在庫競合制御</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/spec-coding-modulith/docs/business-rule/BR-004_返品・交換処理ルール"><span title="BR-004: 返品・交換処理ルール" class="linkLabel_WmDU">BR-004: 返品・交換処理ルール</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/spec-coding-modulith/docs/business-rule/BR-005_注文ステータス遷移ルール"><span title="BR-005: 注文ステータス遷移ルール" class="linkLabel_WmDU">BR-005: 注文ステータス遷移ルール</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/spec-coding-modulith/docs/business-rule/BR-006_決済失敗時の在庫ロールバック"><span title="BR-006: 決済失敗時の在庫ロールバック" class="linkLabel_WmDU">BR-006: 決済失敗時の在庫ロールバック</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/spec-coding-modulith/docs/business-rule/BR-007_カート保持期限ルール"><span title="BR-007: カート保持期限ルール" class="linkLabel_WmDU">BR-007: カート保持期限ルール</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/spec-coding-modulith/docs/business-rule/BR-008_在庫負数防止ルール"><span title="BR-008: 在庫負数防止ルール" class="linkLabel_WmDU">BR-008: 在庫負数防止ルール</span></a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/spec-coding-modulith/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">BR-008: 在庫負数防止ルール</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>BR-008: 在庫負数防止ルール</h1></header>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="基本情報">基本情報<a href="#基本情報" class="hash-link" aria-label="Direct link to 基本情報" title="Direct link to 基本情報" translate="no">​</a></h2>
+<table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td><strong>ルールID</strong></td><td>BR-008</td></tr><tr><td><strong>ルール名</strong></td><td>在庫負数防止ルール</td></tr><tr><td><strong>カテゴリ</strong></td><td>在庫管理</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="概要">概要<a href="#概要" class="hash-link" aria-label="Direct link to 概要" title="Direct link to 概要" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="目的">目的<a href="#目的" class="hash-link" aria-label="Direct link to 目的" title="Direct link to 目的" translate="no">​</a></h3>
+<p>在庫数が負数になることを絶対に防止し、データ整合性を保つ。在庫負数は在庫管理の重大な不整合であり、オーバーセル（過剰販売）や会計上の問題を引き起こす。システムレベルで在庫負数を検出・防止し、発生時には即座にアラートを発行することで、ビジネスへの影響を最小限に抑える。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="適用範囲">適用範囲<a href="#適用範囲" class="hash-link" aria-label="Direct link to 適用範囲" title="Direct link to 適用範囲" translate="no">​</a></h3>
+<ul>
+<li class="">在庫引当処理</li>
+<li class="">在庫更新処理（入荷、出荷、キャンセル、返品）</li>
+<li class="">在庫データの整合性チェック</li>
+<li class="">在庫負数の検出とアラート</li>
+<li class="">データベース制約による防止</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ルール詳細">ルール詳細<a href="#ルール詳細" class="hash-link" aria-label="Direct link to ルール詳細" title="Direct link to ルール詳細" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ビジネスルール記述">ビジネスルール記述<a href="#ビジネスルール記述" class="hash-link" aria-label="Direct link to ビジネスルール記述" title="Direct link to ビジネスルール記述" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="前提条件">前提条件<a href="#前提条件" class="hash-link" aria-label="Direct link to 前提条件" title="Direct link to 前提条件" translate="no">​</a></h4>
+<ul>
+<li class="">在庫データはSKU単位でInventoryLocationテーブルに保持されている</li>
+<li class="">在庫数には物理在庫数（physical_qty）と引当済み数量（allocated_qty）が存在する</li>
+<li class="">データベースにはCHECK制約が設定されている</li>
+<li class="">在庫操作は必ずトランザクション内で実行される</li>
+<li class="">在庫の監視システムが稼働している</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="ルールステートメント">ルールステートメント<a href="#ルールステートメント" class="hash-link" aria-label="Direct link to ルールステートメント" title="Direct link to ルールステートメント" translate="no">​</a></h4>
+<p><strong>IF（条件）</strong></p>
+<ul>
+<li class="">在庫の引当、出荷、その他の操作により在庫数が減少する</li>
+<li class="">または、在庫データの更新が試みられる</li>
+</ul>
+<p><strong>THEN（アクション/結果）</strong></p>
+<ul>
+<li class="">
+<p><strong>アプリケーションレベルでの防止</strong>:</p>
+<ol>
+<li class="">在庫更新前に必ず残高チェックを実行</li>
+<li class="">利用可能在庫数 = 物理在庫数 - 引当済み数量</li>
+<li class="">利用可能在庫数 &lt; 0 となる更新は拒否</li>
+<li class="">引当済み数量 &gt; 物理在庫数 となる状態も拒否</li>
+</ol>
+</li>
+<li class="">
+<p><strong>データベースレベルでの防止</strong>:</p>
+<ol>
+<li class="">CHECK制約: physical_qty &gt;= 0</li>
+<li class="">CHECK制約: allocated_qty &gt;= 0</li>
+<li class="">CHECK制約: allocated_qty <code>&lt;=</code> physical_qty</li>
+<li class="">制約違反時はトランザクションをロールバック</li>
+</ol>
+</li>
+<li class="">
+<p><strong>検出時の対応</strong>:</p>
+<ol>
+<li class="">エラーログに詳細を記録（SKU、操作内容、現在値、試行値）</li>
+<li class="">即座にアラートを発行（Slack、メール、監視ツール）</li>
+<li class="">管理者ダッシュボードに異常を表示</li>
+<li class="">該当SKUの注文を一時停止（オプション）</li>
+<li class="">インシデント対応フローを起動</li>
+</ol>
+</li>
+</ul>
+<p><strong>ELSE（代替アクション）</strong></p>
+<ul>
+<li class="">在庫更新が正常な範囲内の場合、処理を続行</li>
+<li class="">定期的な整合性チェックでも異常が検出されない場合、正常と判断</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="制約条件">制約条件<a href="#制約条件" class="hash-link" aria-label="Direct link to 制約条件" title="Direct link to 制約条件" translate="no">​</a></h4>
+<ul>
+<li class="">
+<p><strong>データベース制約</strong>:</p>
+<div class="language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">ALTER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> inventory_location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ADD</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CONSTRAINT</span><span class="token plain"> chk_physical_qty_non_negative </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">CHECK</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">physical_qty </span><span class="token operator" style="color:#393A34">&gt;=</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ALTER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> inventory_location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ADD</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CONSTRAINT</span><span class="token plain"> chk_allocated_qty_non_negative </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">CHECK</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">allocated_qty </span><span class="token operator" style="color:#393A34">&gt;=</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ALTER</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">TABLE</span><span class="token plain"> inventory_location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">ADD</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">CONSTRAINT</span><span class="token plain"> chk_allocated_lte_physical </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token keyword" style="color:#00009f">CHECK</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">allocated_qty </span><span class="token operator" style="color:#393A34">&lt;=</span><span class="token plain"> physical_qty</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+</li>
+<li class="">
+<p><strong>アプリケーション制約</strong>:</p>
+<ul>
+<li class="">在庫引当前に必ず残高チェックを実行</li>
+<li class="">在庫更新はトランザクション内で実行し、失敗時はロールバック</li>
+<li class="">在庫負数が検出された場合、該当SKUの注文を一時停止</li>
+</ul>
+</li>
+<li class="">
+<p><strong>監視・アラート</strong>:</p>
+<ul>
+<li class="">在庫負数検出時は即座にアラート（P0インシデント）</li>
+<li class="">在庫負数の発生回数を監視（月次レポート）</li>
+<li class="">在庫データの整合性を毎日バッチでチェック</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ビジネスロジック">ビジネスロジック<a href="#ビジネスロジック" class="hash-link" aria-label="Direct link to ビジネスロジック" title="Direct link to ビジネスロジック" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="計算式アルゴリズム">計算式・アルゴリズム<a href="#計算式アルゴリズム" class="hash-link" aria-label="Direct link to 計算式・アルゴリズム" title="Direct link to 計算式・アルゴリズム" translate="no">​</a></h4>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">在庫更新前のチェック:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">FUNCTION safe_allocate_inventory(sku, location, qty):</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  BEGIN TRANSACTION</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 1. 在庫レコードを取得（排他ロック）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    inventory = SELECT * FROM inventory_location </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                WHERE sku = :sku AND location = :location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                FOR UPDATE</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 2. 利用可能在庫を計算</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    available = inventory.physical_qty - inventory.allocated_qty</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 3. 引当可否をチェック</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    IF available &lt; qty THEN</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      ROLLBACK</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      RETURN error(&quot;在庫不足: 利用可能=&quot; + available + &quot;, 要求=&quot; + qty)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    END IF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 4. 引当後の状態をシミュレーション</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    new_allocated = inventory.allocated_qty + qty</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 5. 負数チェック（二重チェック）</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    IF new_allocated &lt; 0 OR new_allocated &gt; inventory.physical_qty THEN</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      ROLLBACK</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      log_error(&quot;在庫負数の危険を検出&quot;, {sku, location, new_allocated})</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      send_alert(&quot;在庫負数リスク検出&quot;, P0)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      RETURN error(&quot;在庫更新エラー&quot;)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    END IF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 6. 在庫を更新</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    UPDATE inventory_location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    SET allocated_qty = new_allocated,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        updated_at = CURRENT_TIMESTAMP</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    WHERE sku = :sku AND location = :location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 7. トランザクションログ記録</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    INSERT INTO inventory_transaction (...)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  COMMIT</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  RETURN success</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">在庫整合性チェック（バッチ処理）:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">FUNCTION check_inventory_integrity():</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  # 1. 負数の在庫を検出</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  negative_inventories = SELECT * FROM inventory_location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                         WHERE physical_qty &lt; 0 </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                            OR allocated_qty &lt; 0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                            OR allocated_qty &gt; physical_qty</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  IF negative_inventories.count &gt; 0 THEN</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    FOR EACH inv IN negative_inventories:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      log_critical(&quot;在庫負数検出&quot;, {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        sku: inv.sku,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        location: inv.location,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        physical_qty: inv.physical_qty,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        allocated_qty: inv.allocated_qty</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      })</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      send_alert(&quot;在庫負数検出&quot;, {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        severity: P0,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        sku: inv.sku,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        details: inv</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      })</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      # 該当SKUの注文を一時停止</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      suspend_orders_for_sku(inv.sku)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    END FOR</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  END IF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  # 2. トランザクションログとの整合性チェック</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  FOR EACH inventory IN all_inventories:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    calculated_qty = calculate_from_transactions(inventory.sku)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    IF calculated_qty != inventory.physical_qty THEN</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      log_warning(&quot;在庫不整合検出&quot;, {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        sku: inventory.sku,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        db_qty: inventory.physical_qty,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        calculated_qty: calculated_qty,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        diff: calculated_qty - inventory.physical_qty</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      })</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      send_alert(&quot;在庫不整合&quot;, {severity: P1, ...})</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    END IF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  END FOR</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">在庫負数発生時のリカバリ:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">FUNCTION recover_negative_inventory(sku, location):</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  BEGIN TRANSACTION</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 1. 在庫トランザクション履歴を分析</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    transactions = SELECT * FROM inventory_transaction</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                   WHERE sku = :sku AND location = :location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                   ORDER BY created_at DESC</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 2. 理論上の正しい在庫数を計算</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    correct_qty = calculate_correct_inventory(transactions)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    # 3. 管理者に確認を求める</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    approval = request_admin_approval({</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      sku: sku,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      current_qty: inventory.physical_qty,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      calculated_qty: correct_qty,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      transactions: transactions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    })</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    IF approval.approved THEN</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      # 4. 在庫を修正</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      UPDATE inventory_location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      SET physical_qty = :correct_qty,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          allocated_qty = MIN(allocated_qty, correct_qty)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      WHERE sku = :sku AND location = :location</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      # 5. 修正ログを記録</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      INSERT INTO inventory_adjustment_log (</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        sku, location, old_qty, new_qty, reason, approved_by</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      )</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    END IF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  COMMIT</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="判定基準">判定基準<a href="#判定基準" class="hash-link" aria-label="Direct link to 判定基準" title="Direct link to 判定基準" translate="no">​</a></h4>
+<ul>
+<li class="">
+<p><strong>在庫負数の深刻度</strong>:</p>
+<ul>
+<li class="">P0（緊急）: physical_qty &lt; 0 または allocated_qty &gt; physical_qty<!-- -->
+<ul>
+<li class="">即座にアラート、該当SKUの注文停止、手動対応</li>
+</ul>
+</li>
+<li class="">P1（高）: トランザクションログと在庫数の不整合<!-- -->
+<ul>
+<li class="">24時間以内に調査・修正</li>
+</ul>
+</li>
+<li class="">P2（中）: 在庫数が0に近い（セーフティストック未満）<!-- -->
+<ul>
+<li class="">発注アラート</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>リカバリの優先度</strong>:</p>
+<ol>
+<li class="">データ整合性の回復（在庫負数の修正）</li>
+<li class="">原因分析（どの処理で負数が発生したか）</li>
+<li class="">再発防止策の実施（コード修正、制約追加）</li>
+</ol>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="例外処理">例外処理<a href="#例外処理" class="hash-link" aria-label="Direct link to 例外処理" title="Direct link to 例外処理" translate="no">​</a></h4>
+<ul>
+<li class=""><strong>データベース制約違反</strong>: トランザクションをロールバックし、エラーログに記録</li>
+<li class=""><strong>在庫負数検出</strong>: 即座にアラートを発行し、該当SKUの注文を停止</li>
+<li class=""><strong>トランザクションログ不整合</strong>: 管理者に通知し、手動調査を依頼</li>
+<li class=""><strong>リカバリ失敗</strong>: エスカレーションフローに従い、上位管理者に連絡</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="具体例">具体例<a href="#具体例" class="hash-link" aria-label="Direct link to 具体例" title="Direct link to 具体例" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ケース1-正常系---在庫引当成功">ケース1: 正常系 - 在庫引当成功<a href="#ケース1-正常系---在庫引当成功" class="hash-link" aria-label="Direct link to ケース1: 正常系 - 在庫引当成功" title="Direct link to ケース1: 正常系 - 在庫引当成功" translate="no">​</a></h3>
+<p><strong>シナリオ:</strong>
+十分な在庫がある状態で、正常に在庫引当が行われる。</p>
+<p><strong>入力:</strong></p>
+<ul>
+<li class="">SKU: SHIRT-001</li>
+<li class="">Location: 東京倉庫</li>
+<li class="">物理在庫数: 100</li>
+<li class="">引当済み数量: 30</li>
+<li class="">引当リクエスト: 5</li>
+</ul>
+<p><strong>処理の流れ:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">1. 利用可能在庫計算: 100 - 30 = 70</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. 引当可否チェック: 70 &gt;= 5 → OK</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. 引当後シミュレーション: 30 + 5 = 35</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">4. 負数チェック: 35 &gt;= 0 AND 35 &lt;= 100 → OK</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">5. 在庫更新: allocated_qty = 35</span><br></span></code></pre></div></div>
+<p><strong>期待される出力:</strong></p>
+<ul>
+<li class="">引当: 成功</li>
+<li class="">引当後の allocated_qty: 35</li>
+<li class="">利用可能在庫: 65</li>
+<li class="">アラート: なし</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ケース2-異常系---在庫不足による引当失敗">ケース2: 異常系 - 在庫不足による引当失敗<a href="#ケース2-異常系---在庫不足による引当失敗" class="hash-link" aria-label="Direct link to ケース2: 異常系 - 在庫不足による引当失敗" title="Direct link to ケース2: 異常系 - 在庫不足による引当失敗" translate="no">​</a></h3>
+<p><strong>シナリオ:</strong>
+利用可能在庫が不足しており、引当が拒否される。</p>
+<p><strong>入力:</strong></p>
+<ul>
+<li class="">SKU: JACKET-002</li>
+<li class="">物理在庫数: 50</li>
+<li class="">引当済み数量: 48</li>
+<li class="">引当リクエスト: 5</li>
+</ul>
+<p><strong>処理の流れ:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">1. 利用可能在庫計算: 50 - 48 = 2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. 引当可否チェック: 2 &gt;= 5 → NG</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. トランザクションロールバック</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">4. エラー返却</span><br></span></code></pre></div></div>
+<p><strong>期待される出力:</strong></p>
+<ul>
+<li class="">引当: 失敗</li>
+<li class="">エラーメッセージ: &quot;在庫不足: 利用可能=2, 要求=5&quot;</li>
+<li class="">在庫数: 変更なし（physical_qty=50, allocated_qty=48）</li>
+<li class="">アラート: なし（正常なエラーハンドリング）</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ケース3-重大異常---在庫負数検出">ケース3: 重大異常 - 在庫負数検出<a href="#ケース3-重大異常---在庫負数検出" class="hash-link" aria-label="Direct link to ケース3: 重大異常 - 在庫負数検出" title="Direct link to ケース3: 重大異常 - 在庫負数検出" translate="no">​</a></h3>
+<p><strong>シナリオ:</strong>
+システムのバグにより、在庫負数が発生してしまう（本来は防止されるべき）。</p>
+<p><strong>入力:</strong></p>
+<ul>
+<li class="">SKU: LIMITED-ITEM</li>
+<li class="">物理在庫数: 10</li>
+<li class="">引当済み数量: 12（異常状態）</li>
+</ul>
+<p><strong>検出時の処理:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">1. バッチ処理で整合性チェック実行</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. 異常検出: allocated_qty (12) &gt; physical_qty (10)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. 即座にアラート発行:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Severity: P0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Message: &quot;在庫負数検出: SKU=LIMITED-ITEM, physical=10, allocated=12&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">4. 該当SKUの注文を一時停止</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">5. 管理者ダッシュボードに表示</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">6. インシデント対応フロー起動</span><br></span></code></pre></div></div>
+<p><strong>期待される出力:</strong></p>
+<ul>
+<li class="">アラート: P0（緊急）</li>
+<li class="">注文停止: LIMITED-ITEM の新規注文を停止</li>
+<li class="">ログ: 詳細なエラーログ記録</li>
+<li class="">対応: 手動調査・修正が必要</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ケース4-データベース制約による防止">ケース4: データベース制約による防止<a href="#ケース4-データベース制約による防止" class="hash-link" aria-label="Direct link to ケース4: データベース制約による防止" title="Direct link to ケース4: データベース制約による防止" translate="no">​</a></h3>
+<p><strong>シナリオ:</strong>
+アプリケーションのバグで負数更新が試みられるが、データベース制約で防止される。</p>
+<p><strong>入力:</strong></p>
+<ul>
+<li class="">SKU: COAT-003</li>
+<li class="">現在の physical_qty: 20</li>
+<li class="">バグのある更新クエリ: SET physical_qty = -5</li>
+</ul>
+<p><strong>処理の流れ:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">1. UPDATE文実行</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. データベースがCHECK制約違反を検出</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. トランザクション自動ロールバック</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">4. アプリケーションにエラー返却</span><br></span></code></pre></div></div>
+<p><strong>期待される出力:</strong></p>
+<ul>
+<li class="">更新: 失敗（制約違反）</li>
+<li class="">エラー: &quot;CHECK constraint violation: physical_qty &gt;= 0&quot;</li>
+<li class="">在庫数: 変更なし（20のまま）</li>
+<li class="">ログ: エラーログに記録、開発チームに通知</li>
+<li class="">アラート: バグ検出アラート発行</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="関連ルール">関連ルール<a href="#関連ルール" class="hash-link" aria-label="Direct link to 関連ルール" title="Direct link to 関連ルール" translate="no">​</a></h2>
+<ul>
+<li class="">BR-001: 在庫引当とロック機構</li>
+<li class="">BR-003: 在庫競合制御</li>
+<li class="">BR-006: 決済失敗時の在庫ロールバック</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="備考補足事項">備考・補足事項<a href="#備考補足事項" class="hash-link" aria-label="Direct link to 備考・補足事項" title="Direct link to 備考・補足事項" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="注意事項">注意事項<a href="#注意事項" class="hash-link" aria-label="Direct link to 注意事項" title="Direct link to 注意事項" translate="no">​</a></h3>
+<ul>
+<li class="">在庫負数は重大なデータ不整合であり、絶対に防止する必要がある</li>
+<li class="">アプリケーションレベルとデータベースレベルの多層防御を実装すること</li>
+<li class="">在庫負数が検出された場合は、ビジネスへの影響を最小限に抑えるため、即座に対応すること</li>
+<li class="">在庫トランザクションログは詳細に記録し、原因分析に活用すること</li>
+<li class="">定期的な整合性チェックにより、潜在的な問題を早期に発見すること</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/spec-coding-modulith/docs/business-rule/BR-007_カート保持期限ルール"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">BR-007: カート保持期限ルール</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#基本情報" class="table-of-contents__link toc-highlight">基本情報</a></li><li><a href="#概要" class="table-of-contents__link toc-highlight">概要</a><ul><li><a href="#目的" class="table-of-contents__link toc-highlight">目的</a></li><li><a href="#適用範囲" class="table-of-contents__link toc-highlight">適用範囲</a></li></ul></li><li><a href="#ルール詳細" class="table-of-contents__link toc-highlight">ルール詳細</a><ul><li><a href="#ビジネスルール記述" class="table-of-contents__link toc-highlight">ビジネスルール記述</a></li><li><a href="#ビジネスロジック" class="table-of-contents__link toc-highlight">ビジネスロジック</a></li></ul></li><li><a href="#具体例" class="table-of-contents__link toc-highlight">具体例</a><ul><li><a href="#ケース1-正常系---在庫引当成功" class="table-of-contents__link toc-highlight">ケース1: 正常系 - 在庫引当成功</a></li><li><a href="#ケース2-異常系---在庫不足による引当失敗" class="table-of-contents__link toc-highlight">ケース2: 異常系 - 在庫不足による引当失敗</a></li><li><a href="#ケース3-重大異常---在庫負数検出" class="table-of-contents__link toc-highlight">ケース3: 重大異常 - 在庫負数検出</a></li><li><a href="#ケース4-データベース制約による防止" class="table-of-contents__link toc-highlight">ケース4: データベース制約による防止</a></li></ul></li><li><a href="#関連ルール" class="table-of-contents__link toc-highlight">関連ルール</a></li><li><a href="#備考補足事項" class="table-of-contents__link toc-highlight">備考・補足事項</a><ul><li><a href="#注意事項" class="table-of-contents__link toc-highlight">注意事項</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Spec Driven Modulith. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

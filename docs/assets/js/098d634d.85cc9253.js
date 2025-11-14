@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkportal=globalThis.webpackChunkportal||[]).push([[4867],{12027:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"business-rule"}')}}]);
