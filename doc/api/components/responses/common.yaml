@@ -1,0 +1,124 @@
+BadRequest:
+  description: リクエストが不正です
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "BAD_REQUEST"
+        message: "リクエストパラメータが不正です"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/orders"
+        details:
+          - field: "quantity"
+            message: "数量は1以上である必要があります"
+            code: "INVALID_QUANTITY"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+Unauthorized:
+  description: 認証が必要です
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "UNAUTHORIZED"
+        message: "認証が必要です。ログインしてください"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/orders"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+Forbidden:
+  description: アクセス権限がありません
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "FORBIDDEN"
+        message: "このリソースにアクセスする権限がありません"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/admin/inventory"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+NotFound:
+  description: リソースが見つかりません
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "NOT_FOUND"
+        message: "指定されたリソースが見つかりません"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/orders/999"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+Conflict:
+  description: リソースの競合が発生しました
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "CONFLICT"
+        message: "在庫が不足しています"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/orders"
+        details:
+          - field: "skuId"
+            message: "SKU 'SKU123' の在庫が不足しています（要求: 5, 利用可能: 2）"
+            code: "INSUFFICIENT_STOCK"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+UnprocessableEntity:
+  description: 処理できないエンティティです
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "UNPROCESSABLE_ENTITY"
+        message: "処理できないデータです"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/orders"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+TooManyRequests:
+  description: レート制限を超えました
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "TOO_MANY_REQUESTS"
+        message: "レート制限を超えました。しばらく待ってから再試行してください"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/products/search"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+InternalServerError:
+  description: サーバー内部エラー
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "INTERNAL_SERVER_ERROR"
+        message: "サーバーエラーが発生しました"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/orders"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+ServiceUnavailable:
+  description: サービスが利用できません
+  content:
+    application/json:
+      schema:
+        $ref: '../schemas/common/error-response.yaml#/ErrorResponse'
+      example:
+        code: "SERVICE_UNAVAILABLE"
+        message: "現在サービスが利用できません。メンテナンス中です"
+        timestamp: "2025-11-12T10:30:00Z"
+        path: "/v1/orders"
+        traceId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"

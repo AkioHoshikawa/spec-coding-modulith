@@ -1,0 +1,102 @@
+get:
+  tags:
+    - Returns
+  summary: 返品一覧取得
+  description: |
+    返品・交換の一覧を取得します。管理者は全返品、一般ユーザーは自分の返品のみ取得できます。
+  operationId: getReturns
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/common.yaml#/PageParam'
+    - $ref: '../../components/parameters/common.yaml#/PageSizeParam'
+    - name: status
+      in: query
+      description: ステータスでフィルタ
+      required: false
+      schema:
+        type: string
+        enum:
+          - REQUESTED
+          - APPROVED
+          - REJECTED
+          - SHIPPED
+          - RECEIVED
+          - INSPECTED
+          - COMPLETED
+          - CANCELLED
+      example: "REQUESTED"
+    - name: type
+      in: query
+      description: タイプでフィルタ
+      required: false
+      schema:
+        type: string
+        enum:
+          - RETURN
+          - EXCHANGE
+      example: "RETURN"
+  responses:
+    '200':
+      description: 返品一覧取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '../../components/schemas/return.yaml#/Return'
+              meta:
+                $ref: '../../components/schemas/common/pagination.yaml#/PaginationMeta'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'
+
+post:
+  tags:
+    - Returns
+  summary: 返品・交換申請
+  description: |
+    注文に対して返品または交換の申請を行います。
+  operationId: createReturn
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/return.yaml#/CreateReturnRequest'
+  responses:
+    '201':
+      description: 返品申請成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/return.yaml#/Return'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '404':
+      description: 注文が見つかりません
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+    '409':
+      description: 返品不可の注文
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "RETURN_NOT_ALLOWED"
+            message: "この注文は返品できません（返品期限を過ぎています）"
+            timestamp: "2025-11-12T10:30:00Z"
+            path: "/v1/returns"
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

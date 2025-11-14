@@ -1,0 +1,121 @@
+Product:
+  type: object
+  required:
+    - productId
+    - name
+    - category
+    - price
+    - currency
+    - status
+  properties:
+    productId:
+      type: string
+      format: uuid
+      description: 商品ID
+      example: "990e8400-e29b-41d4-a716-446655440000"
+    name:
+      type: string
+      description: 商品名
+      example: "レザージャケット"
+    description:
+      type: string
+      description: 商品説明
+      example: "高品質な本革を使用したジャケットです"
+    category:
+      type: string
+      description: カテゴリ
+      example: "アウター"
+    brand:
+      type: string
+      description: ブランド
+      example: "Premium Fashion"
+    price:
+      type: number
+      format: decimal
+      description: 価格（税抜）
+      example: 29800
+    currency:
+      type: string
+      description: 通貨コード
+      example: "JPY"
+    images:
+      type: array
+      description: 商品画像URL
+      items:
+        type: string
+        format: uri
+      example:
+        - "https://cdn.example.com/products/jacket-123-1.jpg"
+        - "https://cdn.example.com/products/jacket-123-2.jpg"
+    status:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+        - OUT_OF_STOCK
+      description: 商品ステータス
+      example: "ACTIVE"
+    availableSkus:
+      type: array
+      description: 利用可能なSKU一覧
+      items:
+        $ref: '#/SKU'
+    createdAt:
+      type: string
+      format: date-time
+      example: "2025-01-01T00:00:00Z"
+    updatedAt:
+      type: string
+      format: date-time
+      example: "2025-11-12T10:00:00Z"
+
+SKU:
+  type: object
+  required:
+    - skuId
+    - productId
+    - price
+    - stockQuantity
+  properties:
+    skuId:
+      type: string
+      description: SKU ID
+      example: "SKU-JACKET-M-BLACK"
+    productId:
+      type: string
+      format: uuid
+      description: 商品ID
+      example: "990e8400-e29b-41d4-a716-446655440000"
+    size:
+      type: string
+      description: サイズ
+      example: "M"
+    color:
+      type: string
+      description: カラー
+      example: "ブラック"
+    price:
+      type: number
+      format: decimal
+      description: 価格（税抜）
+      example: 29800
+    stockQuantity:
+      type: integer
+      minimum: 0
+      description: 在庫数
+      example: 10
+    reserved:
+      type: integer
+      minimum: 0
+      description: 引当済み数量
+      example: 2
+    available:
+      type: integer
+      minimum: 0
+      description: 利用可能在庫数
+      example: 8
+    imageUrl:
+      type: string
+      format: uri
+      description: SKU固有の画像URL
+      example: "https://cdn.example.com/skus/jacket-m-black.jpg"

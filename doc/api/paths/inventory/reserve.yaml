@@ -1,0 +1,66 @@
+post:
+  tags:
+    - Inventory
+  summary: 在庫予約
+  description: |
+    指定されたSKUの在庫を予約します。注文確定時に自動的に実行されます。
+  operationId: reserveInventory
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: skuId
+      in: path
+      required: true
+      description: SKU ID
+      schema:
+        type: string
+      example: "SKU-JACKET-M-BLACK"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - quantity
+          properties:
+            quantity:
+              type: integer
+              minimum: 1
+              description: 予約数量
+              example: 2
+            orderId:
+              type: string
+              format: uuid
+              description: 注文ID
+              example: "770e8400-e29b-41d4-a716-446655440000"
+            expiresInMinutes:
+              type: integer
+              minimum: 1
+              description: 予約有効期限（分）
+              default: 30
+              example: 30
+  responses:
+    '201':
+      description: 予約成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/inventory.yaml#/InventoryReservation'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '409':
+      description: 在庫不足
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "INSUFFICIENT_STOCK"
+            message: "在庫が不足しています"
+            timestamp: "2025-11-12T10:30:00Z"
+            path: "/v1/inventory/skus/SKU-JACKET-M-BLACK/reserve"
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

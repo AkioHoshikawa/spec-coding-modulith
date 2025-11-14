@@ -1,0 +1,37 @@
+get:
+  tags:
+    - Products
+  summary: 商品検索
+  description: |
+    キーワードで商品を検索します。
+  operationId: searchProducts
+  security: []
+  parameters:
+    - $ref: '../../components/parameters/common.yaml#/SearchParam'
+    - $ref: '../../components/parameters/common.yaml#/PageParam'
+    - $ref: '../../components/parameters/common.yaml#/PageSizeParam'
+    - name: category
+      in: query
+      description: カテゴリでフィルタ
+      required: false
+      schema:
+        type: string
+      example: "アウター"
+  responses:
+    '200':
+      description: 検索成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '../../components/schemas/product.yaml#/Product'
+              meta:
+                $ref: '../../components/schemas/common/pagination.yaml#/PaginationMeta'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

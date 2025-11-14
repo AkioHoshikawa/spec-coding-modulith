@@ -1,0 +1,51 @@
+PaginationMeta:
+  type: object
+  required:
+    - page
+    - pageSize
+    - totalItems
+    - totalPages
+  properties:
+    page:
+      type: integer
+      minimum: 1
+      description: 現在のページ番号
+      example: 1
+    pageSize:
+      type: integer
+      minimum: 1
+      maximum: 100
+      description: 1ページあたりのアイテム数
+      example: 20
+    totalItems:
+      type: integer
+      minimum: 0
+      description: 総アイテム数
+      example: 150
+    totalPages:
+      type: integer
+      minimum: 0
+      description: 総ページ数
+      example: 8
+    hasNext:
+      type: boolean
+      description: 次のページが存在するか
+      example: true
+    hasPrevious:
+      type: boolean
+      description: 前のページが存在するか
+      example: false
+
+PaginatedResponse:
+  type: object
+  required:
+    - data
+    - meta
+  properties:
+    data:
+      type: array
+      description: データ配列
+      items:
+        type: object
+    meta:
+      $ref: '#/PaginationMeta'

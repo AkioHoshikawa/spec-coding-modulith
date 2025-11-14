@@ -1,0 +1,127 @@
+get:
+  tags:
+    - Users
+  summary: 住所詳細取得
+  description: |
+    指定された住所IDの詳細情報を取得します。
+  operationId: getAddressDetail
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: addressId
+      in: path
+      required: true
+      description: 住所ID
+      schema:
+        type: string
+        format: uuid
+      example: "660f9511-f3ac-52e5-b827-557766551111"
+  responses:
+    '200':
+      description: 住所詳細取得成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/user.yaml#/Address'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'
+
+put:
+  tags:
+    - Users
+  summary: 住所更新
+  description: |
+    指定された住所IDの情報を更新します。
+  operationId: updateAddress
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: addressId
+      in: path
+      required: true
+      description: 住所ID
+      schema:
+        type: string
+        format: uuid
+      example: "660f9511-f3ac-52e5-b827-557766551111"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            firstName:
+              type: string
+              example: "太郎"
+            lastName:
+              type: string
+              example: "山田"
+            phoneNumber:
+              type: string
+              example: "090-1234-5678"
+            postalCode:
+              type: string
+              example: "100-0001"
+            prefecture:
+              type: string
+              example: "東京都"
+            city:
+              type: string
+              example: "千代田区"
+            addressLine1:
+              type: string
+              example: "丸の内1-1-1"
+            addressLine2:
+              type: string
+              example: "丸の内ビル 10F"
+            isDefault:
+              type: boolean
+              example: false
+  responses:
+    '200':
+      description: 住所更新成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/user.yaml#/Address'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'
+
+delete:
+  tags:
+    - Users
+  summary: 住所削除
+  description: |
+    指定された住所IDを削除します。
+  operationId: deleteAddress
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: addressId
+      in: path
+      required: true
+      description: 住所ID
+      schema:
+        type: string
+        format: uuid
+      example: "660f9511-f3ac-52e5-b827-557766551111"
+  responses:
+    '204':
+      description: 住所削除成功
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

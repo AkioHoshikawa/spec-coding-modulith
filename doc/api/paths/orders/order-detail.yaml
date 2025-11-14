@@ -1,0 +1,37 @@
+get:
+  tags:
+    - Orders
+  summary: 注文詳細取得
+  description: |
+    指定された注文IDの詳細情報を取得します。
+  operationId: getOrderDetail
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      description: 注文ID
+      schema:
+        type: string
+        format: uuid
+      example: "770e8400-e29b-41d4-a716-446655440000"
+  responses:
+    '200':
+      description: 注文詳細取得成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/order.yaml#/Order'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      description: 自分の注文ではありません
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

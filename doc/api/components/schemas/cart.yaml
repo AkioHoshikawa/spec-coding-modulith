@@ -1,0 +1,163 @@
+Cart:
+  type: object
+  required:
+    - cartId
+    - userId
+    - items
+    - subtotal
+    - totalAmount
+  properties:
+    cartId:
+      type: string
+      format: uuid
+      description: カートID
+      example: "bb0e8400-e29b-41d4-a716-446655440000"
+    userId:
+      type: string
+      format: uuid
+      description: ユーザーID
+      example: "550e8400-e29b-41d4-a716-446655440000"
+    items:
+      type: array
+      description: カート内商品
+      items:
+        $ref: '#/CartItem'
+    subtotal:
+      type: number
+      format: decimal
+      description: 小計（税抜）
+      example: 10000
+    tax:
+      type: number
+      format: decimal
+      description: 消費税
+      example: 1000
+    shippingFee:
+      type: number
+      format: decimal
+      description: 送料（見積）
+      example: 500
+    discount:
+      type: number
+      format: decimal
+      description: 割引額
+      example: 0
+    totalAmount:
+      type: number
+      format: decimal
+      description: 合計金額
+      example: 11500
+    appliedCoupon:
+      type: string
+      description: 適用されたクーポンコード
+      example: "WELCOME10"
+    createdAt:
+      type: string
+      format: date-time
+      example: "2025-11-12T09:00:00Z"
+    updatedAt:
+      type: string
+      format: date-time
+      example: "2025-11-12T10:00:00Z"
+    expiresAt:
+      type: string
+      format: date-time
+      description: カート有効期限
+      example: "2025-11-19T09:00:00Z"
+
+CartItem:
+  type: object
+  required:
+    - cartItemId
+    - skuId
+    - productName
+    - quantity
+    - unitPrice
+    - subtotal
+  properties:
+    cartItemId:
+      type: string
+      format: uuid
+      description: カート商品ID
+      example: "cc0e8400-e29b-41d4-a716-446655440000"
+    skuId:
+      type: string
+      description: SKU ID
+      example: "SKU-JACKET-M-BLACK"
+    productId:
+      type: string
+      format: uuid
+      description: 商品ID
+      example: "990e8400-e29b-41d4-a716-446655440000"
+    productName:
+      type: string
+      description: 商品名
+      example: "レザージャケット"
+    size:
+      type: string
+      description: サイズ
+      example: "M"
+    color:
+      type: string
+      description: カラー
+      example: "ブラック"
+    imageUrl:
+      type: string
+      format: uri
+      description: 商品画像URL
+      example: "https://cdn.example.com/products/jacket-123.jpg"
+    quantity:
+      type: integer
+      minimum: 1
+      description: 数量
+      example: 2
+    unitPrice:
+      type: number
+      format: decimal
+      description: 単価
+      example: 5000
+    subtotal:
+      type: number
+      format: decimal
+      description: 小計
+      example: 10000
+    available:
+      type: boolean
+      description: 在庫が利用可能か
+      example: true
+    stockQuantity:
+      type: integer
+      description: 現在の在庫数
+      example: 10
+    addedAt:
+      type: string
+      format: date-time
+      description: カート追加日時
+      example: "2025-11-12T09:30:00Z"
+
+AddToCartRequest:
+  type: object
+  required:
+    - skuId
+    - quantity
+  properties:
+    skuId:
+      type: string
+      description: SKU ID
+      example: "SKU-JACKET-M-BLACK"
+    quantity:
+      type: integer
+      minimum: 1
+      description: 数量
+      example: 2
+
+UpdateCartItemRequest:
+  type: object
+  required:
+    - quantity
+  properties:
+    quantity:
+      type: integer
+      minimum: 1
+      description: 更新後の数量
+      example: 3

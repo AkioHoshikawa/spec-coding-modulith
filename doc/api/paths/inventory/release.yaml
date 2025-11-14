@@ -1,0 +1,49 @@
+post:
+  tags:
+    - Inventory
+  summary: 在庫予約解放
+  description: |
+    予約された在庫を解放します。注文キャンセル時などに使用します。
+  operationId: releaseInventory
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: skuId
+      in: path
+      required: true
+      description: SKU ID
+      schema:
+        type: string
+      example: "SKU-JACKET-M-BLACK"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - reservationId
+          properties:
+            reservationId:
+              type: string
+              format: uuid
+              description: 予約ID
+              example: "dd0e8400-e29b-41d4-a716-446655440000"
+  responses:
+    '200':
+      description: 解放成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/SuccessResponse'
+          example:
+            success: true
+            message: "在庫予約を解放しました"
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

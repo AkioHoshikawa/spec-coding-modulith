@@ -1,0 +1,46 @@
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT Bearer Token authentication.
+        
+        トークンを取得するには `/auth/login` エンドポイントを使用してください。
+        
+        Example:
+        ```
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        ```
+    
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 認証フロー（オプション）
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.example.com/oauth/authorize
+          tokenUrl: https://auth.example.com/oauth/token
+          refreshUrl: https://auth.example.com/oauth/refresh
+          scopes:
+            read:profile: プロフィール情報の読み取り
+            write:profile: プロフィール情報の更新
+            read:orders: 注文情報の読み取り
+            write:orders: 注文の作成・更新
+            read:cart: カート情報の読み取り
+            write:cart: カートの操作
+            admin:inventory: 在庫管理（管理者のみ）
+            admin:promotions: プロモーション管理（管理者のみ）
+            admin:orders: すべての注文管理（管理者のみ）
+    
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: |
+        サーバー間通信用のAPIキー（3PL連携などで使用）
+        
+        Example:
+        ```
+        X-API-Key: your-api-key-here
+        ```

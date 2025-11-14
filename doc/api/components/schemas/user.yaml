@@ -1,0 +1,142 @@
+User:
+  type: object
+  required:
+    - userId
+    - email
+    - firstName
+    - lastName
+    - createdAt
+  properties:
+    userId:
+      type: string
+      format: uuid
+      description: ユーザーID
+      example: "550e8400-e29b-41d4-a716-446655440000"
+    email:
+      type: string
+      format: email
+      description: メールアドレス
+      example: "user@example.com"
+    firstName:
+      type: string
+      description: 名
+      example: "太郎"
+    lastName:
+      type: string
+      description: 姓
+      example: "山田"
+    phoneNumber:
+      type: string
+      description: 電話番号
+      example: "090-1234-5678"
+    emailVerified:
+      type: boolean
+      description: メール認証済みか
+      example: true
+    phoneVerified:
+      type: boolean
+      description: 電話番号認証済みか
+      example: false
+    createdAt:
+      type: string
+      format: date-time
+      description: アカウント作成日時
+      example: "2025-01-15T09:00:00Z"
+    updatedAt:
+      type: string
+      format: date-time
+      description: 最終更新日時
+      example: "2025-11-12T10:30:00Z"
+
+UserProfile:
+  allOf:
+    - $ref: '#/User'
+    - type: object
+      properties:
+        defaultShippingAddressId:
+          type: string
+          format: uuid
+          description: デフォルト配送先住所ID
+          example: "660f9511-f3ac-52e5-b827-557766551111"
+        defaultBillingAddressId:
+          type: string
+          format: uuid
+          description: デフォルト請求先住所ID
+          example: "660f9511-f3ac-52e5-b827-557766552222"
+        preferences:
+          type: object
+          description: ユーザー設定
+          properties:
+            newsletter:
+              type: boolean
+              description: メールマガジン購読
+              example: true
+            notifications:
+              type: boolean
+              description: 通知受信
+              example: true
+            language:
+              type: string
+              description: 言語設定
+              example: "ja"
+
+Address:
+  type: object
+  required:
+    - addressId
+    - firstName
+    - lastName
+    - postalCode
+    - prefecture
+    - city
+    - addressLine1
+  properties:
+    addressId:
+      type: string
+      format: uuid
+      description: 住所ID
+      example: "660f9511-f3ac-52e5-b827-557766551111"
+    firstName:
+      type: string
+      description: 名
+      example: "太郎"
+    lastName:
+      type: string
+      description: 姓
+      example: "山田"
+    phoneNumber:
+      type: string
+      description: 電話番号
+      example: "090-1234-5678"
+    postalCode:
+      type: string
+      description: 郵便番号
+      example: "100-0001"
+    prefecture:
+      type: string
+      description: 都道府県
+      example: "東京都"
+    city:
+      type: string
+      description: 市区町村
+      example: "千代田区"
+    addressLine1:
+      type: string
+      description: 住所1（町名・番地）
+      example: "丸の内1-1-1"
+    addressLine2:
+      type: string
+      description: 住所2（建物名・部屋番号）
+      example: "丸の内ビル 10F"
+    isDefault:
+      type: boolean
+      description: デフォルト住所か
+      example: true
+    createdAt:
+      type: string
+      format: date-time
+      example: "2025-01-15T09:00:00Z"
+    updatedAt:
+      type: string
+      format: date-time
+      example: "2025-11-12T10:30:00Z"

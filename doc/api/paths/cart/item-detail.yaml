@@ -1,0 +1,73 @@
+put:
+  tags:
+    - Cart
+  summary: カート商品の数量更新
+  description: |
+    カート内の特定商品の数量を更新します。
+  operationId: updateCartItem
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: itemId
+      in: path
+      required: true
+      description: カート商品ID
+      schema:
+        type: string
+        format: uuid
+      example: "cc0e8400-e29b-41d4-a716-446655440000"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/cart.yaml#/UpdateCartItemRequest'
+  responses:
+    '200':
+      description: 更新成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/cart.yaml#/Cart'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '409':
+      $ref: '../../components/responses/common.yaml#/Conflict'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'
+
+delete:
+  tags:
+    - Cart
+  summary: カートから商品を削除
+  description: |
+    カートから特定の商品を削除します。
+  operationId: removeCartItem
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: itemId
+      in: path
+      required: true
+      description: カート商品ID
+      schema:
+        type: string
+        format: uuid
+      example: "cc0e8400-e29b-41d4-a716-446655440000"
+  responses:
+    '200':
+      description: 削除成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/cart.yaml#/Cart'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

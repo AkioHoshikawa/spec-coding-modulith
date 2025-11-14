@@ -1,0 +1,55 @@
+get:
+  tags:
+    - Shipments
+  summary: 配送追跡情報取得
+  description: |
+    指定された出荷IDの配送追跡情報を取得します。
+  operationId: getShipmentTracking
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: shipmentId
+      in: path
+      required: true
+      description: 出荷ID
+      schema:
+        type: string
+        format: uuid
+      example: "ff0e8400-e29b-41d4-a716-446655440000"
+  responses:
+    '200':
+      description: 追跡情報取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              shipmentId:
+                type: string
+                format: uuid
+                example: "ff0e8400-e29b-41d4-a716-446655440000"
+              trackingNumber:
+                type: string
+                example: "1234567890"
+              carrier:
+                type: string
+                example: "ヤマト運輸"
+              status:
+                type: string
+                example: "IN_TRANSIT"
+              estimatedDeliveryDate:
+                type: string
+                format: date
+                example: "2025-11-15"
+              events:
+                type: array
+                items:
+                  $ref: '../../components/schemas/shipment.yaml#/TrackingEvent'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

@@ -1,0 +1,279 @@
+Order:
+  type: object
+  required:
+    - orderId
+    - orderNumber
+    - userId
+    - status
+    - items
+    - subtotal
+    - tax
+    - shippingFee
+    - totalAmount
+    - createdAt
+  properties:
+    orderId:
+      type: string
+      format: uuid
+      description: 注文ID
+      example: "770e8400-e29b-41d4-a716-446655440000"
+    orderNumber:
+      type: string
+      description: 注文番号（表示用）
+      example: "ORD-20251112-0001"
+    userId:
+      type: string
+      format: uuid
+      description: ユーザーID
+      example: "550e8400-e29b-41d4-a716-446655440000"
+    status:
+      type: string
+      enum:
+        - PENDING
+        - CONFIRMED
+        - PROCESSING
+        - SHIPPED
+        - DELIVERED
+        - CANCELLED
+        - RETURNED
+      description: 注文ステータス
+      example: "CONFIRMED"
+    items:
+      type: array
+      description: 注文商品リスト
+      items:
+        $ref: '#/OrderItem'
+    subtotal:
+      type: number
+      format: decimal
+      description: 小計（税抜）
+      example: 10000
+    tax:
+      type: number
+      format: decimal
+      description: 消費税
+      example: 1000
+    shippingFee:
+      type: number
+      format: decimal
+      description: 送料
+      example: 500
+    discount:
+      type: number
+      format: decimal
+      description: 割引額
+      example: 1000
+    totalAmount:
+      type: number
+      format: decimal
+      description: 合計金額
+      example: 10500
+    shippingAddress:
+      $ref: './user.yaml#/Address'
+    billingAddress:
+      $ref: './user.yaml#/Address'
+    paymentMethod:
+      type: string
+      enum:
+        - CREDIT_CARD
+        - BANK_TRANSFER
+        - COD
+        - DIGITAL_WALLET
+      description: 支払い方法
+      example: "CREDIT_CARD"
+    paymentStatus:
+      type: string
+      enum:
+        - PENDING
+        - AUTHORIZED
+        - CAPTURED
+        - FAILED
+        - REFUNDED
+      description: 支払いステータス
+      example: "CAPTURED"
+    notes:
+      type: string
+      description: 注文メモ
+      example: "ギフト包装希望"
+    createdAt:
+      type: string
+      format: date-time
+      description: 注文日時
+      example: "2025-11-12T10:00:00Z"
+    updatedAt:
+      type: string
+      format: date-time
+      description: 最終更新日時
+      example: "2025-11-12T10:30:00Z"
+    confirmedAt:
+      type: string
+      format: date-time
+      description: 注文確定日時
+      example: "2025-11-12T10:05:00Z"
+    shippedAt:
+      type: string
+      format: date-time
+      description: 出荷日時
+      example: "2025-11-13T09:00:00Z"
+    deliveredAt:
+      type: string
+      format: date-time
+      description: 配送完了日時
+      example: "2025-11-14T15:00:00Z"
+
+OrderItem:
+  type: object
+  required:
+    - orderItemId
+    - skuId
+    - productName
+    - quantity
+    - unitPrice
+    - subtotal
+  properties:
+    orderItemId:
+      type: string
+      format: uuid
+      description: 注文明細ID
+      example: "880e8400-e29b-41d4-a716-446655440000"
+    skuId:
+      type: string
+      description: SKU ID
+      example: "SKU-JACKET-M-BLACK"
+    productId:
+      type: string
+      format: uuid
+      description: 商品ID
+      example: "990e8400-e29b-41d4-a716-446655440000"
+    productName:
+      type: string
+      description: 商品名
+      example: "レザージャケット"
+    size:
+      type: string
+      description: サイズ
+      example: "M"
+    color:
+      type: string
+      description: カラー
+      example: "ブラック"
+    quantity:
+      type: integer
+      minimum: 1
+      description: 数量
+      example: 2
+    unitPrice:
+      type: number
+      format: decimal
+      description: 単価
+      example: 5000
+    subtotal:
+      type: number
+      format: decimal
+      description: 小計
+      example: 10000
+    discount:
+      type: number
+      format: decimal
+      description: 割引額
+      example: 500
+    promotionId:
+      type: string
+      format: uuid
+      description: 適用されたプロモーションID
+      example: "aa0e8400-e29b-41d4-a716-446655440000"
+
+OrderSummary:
+  type: object
+  required:
+    - orderId
+    - orderNumber
+    - status
+    - totalAmount
+    - createdAt
+  properties:
+    orderId:
+      type: string
+      format: uuid
+      example: "770e8400-e29b-41d4-a716-446655440000"
+    orderNumber:
+      type: string
+      example: "ORD-20251112-0001"
+    status:
+      type: string
+      enum:
+        - PENDING
+        - CONFIRMED
+        - PROCESSING
+        - SHIPPED
+        - DELIVERED
+        - CANCELLED
+        - RETURNED
+      example: "DELIVERED"
+    itemCount:
+      type: integer
+      description: 商品点数
+      example: 3
+    totalAmount:
+      type: number
+      format: decimal
+      example: 10500
+    createdAt:
+      type: string
+      format: date-time
+      example: "2025-11-12T10:00:00Z"
+    thumbnailUrl:
+      type: string
+      format: uri
+      description: 代表商品のサムネイル画像URL
+      example: "https://cdn.example.com/products/thumb/jacket-123.jpg"
+
+CreateOrderRequest:
+  type: object
+  required:
+    - items
+    - shippingAddressId
+  properties:
+    items:
+      type: array
+      description: 注文商品リスト
+      items:
+        type: object
+        required:
+          - skuId
+          - quantity
+        properties:
+          skuId:
+            type: string
+            example: "SKU-JACKET-M-BLACK"
+          quantity:
+            type: integer
+            minimum: 1
+            example: 2
+    shippingAddressId:
+      type: string
+      format: uuid
+      description: 配送先住所ID
+      example: "660f9511-f3ac-52e5-b827-557766551111"
+    billingAddressId:
+      type: string
+      format: uuid
+      description: 請求先住所ID（省略時は配送先と同じ）
+      example: "660f9511-f3ac-52e5-b827-557766552222"
+    paymentMethod:
+      type: string
+      enum:
+        - CREDIT_CARD
+        - BANK_TRANSFER
+        - COD
+        - DIGITAL_WALLET
+      description: 支払い方法
+      example: "CREDIT_CARD"
+    couponCode:
+      type: string
+      description: クーポンコード
+      example: "WELCOME10"
+    notes:
+      type: string
+      description: 注文メモ
+      example: "ギフト包装希望"

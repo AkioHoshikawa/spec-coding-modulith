@@ -1,0 +1,64 @@
+post:
+  tags:
+    - Authentication
+  summary: トークンリフレッシュ
+  description: |
+    リフレッシュトークンを使用して新しいアクセストークンを取得します。
+  operationId: refreshToken
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - refreshToken
+          properties:
+            refreshToken:
+              type: string
+              description: リフレッシュトークン
+              example: "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4..."
+  responses:
+    '200':
+      description: トークンリフレッシュ成功
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - accessToken
+              - refreshToken
+              - tokenType
+              - expiresIn
+            properties:
+              accessToken:
+                type: string
+                description: 新しいアクセストークン
+                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+              refreshToken:
+                type: string
+                description: 新しいリフレッシュトークン
+                example: "bmV3IHJlZnJlc2ggdG9rZW4..."
+              tokenType:
+                type: string
+                example: "Bearer"
+              expiresIn:
+                type: integer
+                description: トークンの有効期限（秒）
+                example: 3600
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      description: 無効なリフレッシュトークン
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "INVALID_REFRESH_TOKEN"
+            message: "リフレッシュトークンが無効です"
+            timestamp: "2025-11-12T10:30:00Z"
+            path: "/v1/auth/refresh"
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

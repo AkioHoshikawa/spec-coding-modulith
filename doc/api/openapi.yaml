@@ -1,0 +1,196 @@
+openapi: 3.0.3
+info:
+  title: Fashion EC Order-to-Shipment Platform API
+  description: |
+    # ファッションECの受注〜出荷プラットフォーム API
+    
+    このAPIは、ファッションEコマースプラットフォームの受注から出荷までの
+    プロセスを管理するためのRESTful APIです。
+    
+    ## 主な機能
+    
+    - **認証・認可**: OAuth 2.0 / OpenID Connect対応
+    - **ユーザー管理**: プロフィール、住所管理、注文履歴
+    - **商品カタログ**: 商品検索、詳細情報、在庫確認
+    - **カート管理**: カート操作、商品追加/削除
+    - **注文処理**: 注文確定、ステータス管理、キャンセル
+    - **在庫管理**: リアルタイム在庫引当、ロック機構
+    - **プロモーション**: セール、クーポン、タイムセール、予約販売
+    - **出荷管理**: 出荷指示、配送追跡、3PL連携
+    - **返品・交換**: 返品申請、ステータス管理、返金処理
+    
+    ## レート制限
+    
+    - 認証済みユーザー: 1000リクエスト/分
+    - 未認証: 100リクエスト/分
+    
+    ## エラーハンドリング
+    
+    すべてのエラーレスポンスは統一されたフォーマットを使用します。
+    詳細は `ErrorResponse` スキーマを参照してください。
+    
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: api-support@example.com
+  license:
+    name: Proprietary
+    
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://api-staging.example.com/v1
+    description: Staging server
+  - url: http://localhost:8080/v1
+    description: Local development server
+
+tags:
+  - name: Authentication
+    description: 認証・認可関連のエンドポイント
+  - name: Users
+    description: ユーザー管理
+  - name: Products
+    description: 商品カタログ
+  - name: Cart
+    description: ショッピングカート
+  - name: Orders
+    description: 注文管理
+  - name: Inventory
+    description: 在庫管理
+  - name: Promotions
+    description: プロモーション管理
+  - name: Shipments
+    description: 出荷・配送管理
+  - name: Returns
+    description: 返品・交換管理
+
+paths:
+  # Authentication endpoints
+  /auth/register:
+    $ref: './paths/auth/register.yaml'
+  /auth/login:
+    $ref: './paths/auth/login.yaml'
+  /auth/logout:
+    $ref: './paths/auth/logout.yaml'
+  /auth/refresh:
+    $ref: './paths/auth/refresh.yaml'
+  /auth/password-reset:
+    $ref: './paths/auth/password-reset.yaml'
+  /auth/password-reset/confirm:
+    $ref: './paths/auth/password-reset-confirm.yaml'
+  
+  # User endpoints
+  /users/me:
+    $ref: './paths/users/me.yaml'
+  /users/me/addresses:
+    $ref: './paths/users/addresses.yaml'
+  /users/me/addresses/{addressId}:
+    $ref: './paths/users/address-detail.yaml'
+  /users/me/orders:
+    $ref: './paths/users/order-history.yaml'
+  
+  # Product endpoints
+  /products:
+    $ref: './paths/products/products.yaml'
+  /products/{productId}:
+    $ref: './paths/products/product-detail.yaml'
+  /products/{productId}/skus:
+    $ref: './paths/products/product-skus.yaml'
+  /products/search:
+    $ref: './paths/products/search.yaml'
+  
+  # Cart endpoints
+  /cart:
+    $ref: './paths/cart/cart.yaml'
+  /cart/items:
+    $ref: './paths/cart/items.yaml'
+  /cart/items/{itemId}:
+    $ref: './paths/cart/item-detail.yaml'
+  /cart/validate:
+    $ref: './paths/cart/validate.yaml'
+  
+  # Order endpoints
+  /orders:
+    $ref: './paths/orders/orders.yaml'
+  /orders/{orderId}:
+    $ref: './paths/orders/order-detail.yaml'
+  /orders/{orderId}/cancel:
+    $ref: './paths/orders/cancel.yaml'
+  /orders/{orderId}/status:
+    $ref: './paths/orders/status.yaml'
+  
+  # Inventory endpoints (Admin)
+  /inventory/skus/{skuId}:
+    $ref: './paths/inventory/sku-inventory.yaml'
+  /inventory/skus/{skuId}/reserve:
+    $ref: './paths/inventory/reserve.yaml'
+  /inventory/skus/{skuId}/release:
+    $ref: './paths/inventory/release.yaml'
+  /inventory/adjustments:
+    $ref: './paths/inventory/adjustments.yaml'
+  
+  # Promotion endpoints
+  /promotions:
+    $ref: './paths/promotions/promotions.yaml'
+  /promotions/{promotionId}:
+    $ref: './paths/promotions/promotion-detail.yaml'
+  /promotions/validate-coupon:
+    $ref: './paths/promotions/validate-coupon.yaml'
+  /promotions/calculate-discount:
+    $ref: './paths/promotions/calculate-discount.yaml'
+  
+  # Shipment endpoints
+  /shipments:
+    $ref: './paths/shipments/shipments.yaml'
+  /shipments/{shipmentId}:
+    $ref: './paths/shipments/shipment-detail.yaml'
+  /shipments/{shipmentId}/tracking:
+    $ref: './paths/shipments/tracking.yaml'
+  
+  # Return/Exchange endpoints
+  /returns:
+    $ref: './paths/returns/returns.yaml'
+  /returns/{returnId}:
+    $ref: './paths/returns/return-detail.yaml'
+  /returns/{returnId}/approve:
+    $ref: './paths/returns/approve.yaml'
+  /returns/{returnId}/reject:
+    $ref: './paths/returns/reject.yaml'
+
+components:
+  securitySchemes:
+    $ref: './components/security/security-schemes.yaml#/components/securitySchemes'
+  
+  schemas:
+    # Common schemas
+    ErrorResponse:
+      $ref: './components/schemas/common/error-response.yaml#/ErrorResponse'
+    PaginationMeta:
+      $ref: './components/schemas/common/pagination.yaml#/PaginationMeta'
+    
+  parameters:
+    # Common parameters
+    PageParam:
+      $ref: './components/parameters/common.yaml#/PageParam'
+    PageSizeParam:
+      $ref: './components/parameters/common.yaml#/PageSizeParam'
+    SortParam:
+      $ref: './components/parameters/common.yaml#/SortParam'
+  
+  responses:
+    # Common responses
+    BadRequest:
+      $ref: './components/responses/common.yaml#/BadRequest'
+    Unauthorized:
+      $ref: './components/responses/common.yaml#/Unauthorized'
+    Forbidden:
+      $ref: './components/responses/common.yaml#/Forbidden'
+    NotFound:
+      $ref: './components/responses/common.yaml#/NotFound'
+    Conflict:
+      $ref: './components/responses/common.yaml#/Conflict'
+    InternalServerError:
+      $ref: './components/responses/common.yaml#/InternalServerError'
+
+security:
+  - bearerAuth: []

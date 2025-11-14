@@ -1,0 +1,94 @@
+post:
+  tags:
+    - Authentication
+  summary: ログイン
+  description: |
+    メールアドレスとパスワードでログインし、アクセストークンを取得します。
+  operationId: login
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              format: email
+              description: メールアドレス
+              example: "user@example.com"
+            password:
+              type: string
+              format: password
+              description: パスワード
+              example: "SecurePass123!"
+            rememberMe:
+              type: boolean
+              description: ログイン状態を維持するか
+              default: false
+              example: false
+  responses:
+    '200':
+      description: ログイン成功
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - accessToken
+              - refreshToken
+              - tokenType
+              - expiresIn
+            properties:
+              accessToken:
+                type: string
+                description: アクセストークン（JWT）
+                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+              refreshToken:
+                type: string
+                description: リフレッシュトークン
+                example: "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4..."
+              tokenType:
+                type: string
+                description: トークンタイプ
+                example: "Bearer"
+              expiresIn:
+                type: integer
+                description: トークンの有効期限（秒）
+                example: 3600
+              user:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    format: uuid
+                    example: "550e8400-e29b-41d4-a716-446655440000"
+                  email:
+                    type: string
+                    format: email
+                    example: "user@example.com"
+                  firstName:
+                    type: string
+                    example: "太郎"
+                  lastName:
+                    type: string
+                    example: "山田"
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      description: 認証失敗
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "INVALID_CREDENTIALS"
+            message: "メールアドレスまたはパスワードが正しくありません"
+            timestamp: "2025-11-12T10:30:00Z"
+            path: "/v1/auth/login"
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

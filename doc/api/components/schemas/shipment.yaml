@@ -1,0 +1,108 @@
+Shipment:
+  type: object
+  required:
+    - shipmentId
+    - orderId
+    - status
+    - shippingAddress
+  properties:
+    shipmentId:
+      type: string
+      format: uuid
+      description: 出荷ID
+      example: "ff0e8400-e29b-41d4-a716-446655440000"
+    orderId:
+      type: string
+      format: uuid
+      description: 注文ID
+      example: "770e8400-e29b-41d4-a716-446655440000"
+    trackingNumber:
+      type: string
+      description: 追跡番号
+      example: "1234567890"
+    carrier:
+      type: string
+      description: 配送業者
+      example: "ヤマト運輸"
+    carrierCode:
+      type: string
+      description: 配送業者コード
+      example: "YAMATO"
+    status:
+      type: string
+      enum:
+        - PREPARING
+        - SHIPPED
+        - IN_TRANSIT
+        - OUT_FOR_DELIVERY
+        - DELIVERED
+        - FAILED
+        - RETURNED
+      description: 出荷ステータス
+      example: "IN_TRANSIT"
+    shippingAddress:
+      $ref: './user.yaml#/Address'
+    estimatedDeliveryDate:
+      type: string
+      format: date
+      description: 配送予定日
+      example: "2025-11-15"
+    actualDeliveryDate:
+      type: string
+      format: date
+      description: 実際の配送日
+      example: "2025-11-14"
+    shippedAt:
+      type: string
+      format: date-time
+      description: 出荷日時
+      example: "2025-11-13T09:00:00Z"
+    deliveredAt:
+      type: string
+      format: date-time
+      description: 配送完了日時
+      example: "2025-11-14T15:30:00Z"
+    items:
+      type: array
+      description: 出荷商品
+      items:
+        type: object
+        properties:
+          skuId:
+            type: string
+            example: "SKU-JACKET-M-BLACK"
+          productName:
+            type: string
+            example: "レザージャケット"
+          quantity:
+            type: integer
+            example: 2
+    createdAt:
+      type: string
+      format: date-time
+      example: "2025-11-12T18:00:00Z"
+    updatedAt:
+      type: string
+      format: date-time
+      example: "2025-11-14T15:30:00Z"
+
+TrackingEvent:
+  type: object
+  properties:
+    timestamp:
+      type: string
+      format: date-time
+      description: イベント発生日時
+      example: "2025-11-13T10:00:00Z"
+    status:
+      type: string
+      description: ステータス
+      example: "IN_TRANSIT"
+    location:
+      type: string
+      description: 場所
+      example: "東京ベース店"
+    description:
+      type: string
+      description: 詳細
+      example: "荷物が配送センターを出発しました"

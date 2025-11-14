@@ -1,0 +1,55 @@
+post:
+  tags:
+    - Orders
+  summary: 注文キャンセル
+  description: |
+    注文をキャンセルします。出荷前の注文のみキャンセル可能です。
+  operationId: cancelOrder
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      description: 注文ID
+      schema:
+        type: string
+        format: uuid
+      example: "770e8400-e29b-41d4-a716-446655440000"
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            reason:
+              type: string
+              description: キャンセル理由
+              example: "購入を間違えました"
+  responses:
+    '200':
+      description: キャンセル成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/order.yaml#/Order'
+    '400':
+      description: キャンセルできない注文
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "CANNOT_CANCEL_ORDER"
+            message: "この注文はキャンセルできません（既に出荷済み）"
+            timestamp: "2025-11-12T10:30:00Z"
+            path: "/v1/orders/770e8400-e29b-41d4-a716-446655440000/cancel"
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

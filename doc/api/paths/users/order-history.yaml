@@ -1,0 +1,63 @@
+get:
+  tags:
+    - Users
+  summary: 注文履歴取得
+  description: |
+    ログイン中のユーザーの注文履歴を取得します。
+  operationId: getOrderHistory
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/common.yaml#/PageParam'
+    - $ref: '../../components/parameters/common.yaml#/PageSizeParam'
+    - name: status
+      in: query
+      description: 注文ステータスでフィルタ
+      required: false
+      schema:
+        type: string
+        enum:
+          - PENDING
+          - CONFIRMED
+          - PROCESSING
+          - SHIPPED
+          - DELIVERED
+          - CANCELLED
+          - RETURNED
+      example: "DELIVERED"
+    - name: fromDate
+      in: query
+      description: 開始日（この日以降の注文）
+      required: false
+      schema:
+        type: string
+        format: date
+      example: "2025-01-01"
+    - name: toDate
+      in: query
+      description: 終了日（この日以前の注文）
+      required: false
+      schema:
+        type: string
+        format: date
+      example: "2025-12-31"
+  responses:
+    '200':
+      description: 注文履歴取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '../../components/schemas/order.yaml#/OrderSummary'
+              meta:
+                $ref: '../../components/schemas/common/pagination.yaml#/PaginationMeta'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

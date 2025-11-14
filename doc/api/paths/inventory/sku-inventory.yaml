@@ -1,0 +1,86 @@
+get:
+  tags:
+    - Inventory
+  summary: SKU在庫取得
+  description: |
+    指定されたSKUの在庫情報を取得します（管理者権限が必要）。
+  operationId: getSkuInventory
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: skuId
+      in: path
+      required: true
+      description: SKU ID
+      schema:
+        type: string
+      example: "SKU-JACKET-M-BLACK"
+  responses:
+    '200':
+      description: 在庫情報取得成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/inventory.yaml#/Inventory'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'
+
+put:
+  tags:
+    - Inventory
+  summary: 在庫数更新
+  description: |
+    指定されたSKUの在庫数を更新します（管理者権限が必要）。
+  operationId: updateSkuInventory
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: skuId
+      in: path
+      required: true
+      description: SKU ID
+      schema:
+        type: string
+      example: "SKU-JACKET-M-BLACK"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - totalQuantity
+          properties:
+            totalQuantity:
+              type: integer
+              minimum: 0
+              description: 総在庫数
+              example: 100
+            safetyStock:
+              type: integer
+              minimum: 0
+              description: 安全在庫数
+              example: 10
+  responses:
+    '200':
+      description: 更新成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/inventory.yaml#/Inventory'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

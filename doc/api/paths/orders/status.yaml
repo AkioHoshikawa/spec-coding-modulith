@@ -1,0 +1,70 @@
+get:
+  tags:
+    - Orders
+  summary: 注文ステータス取得
+  description: |
+    注文の現在のステータスを取得します。
+  operationId: getOrderStatus
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      description: 注文ID
+      schema:
+        type: string
+        format: uuid
+      example: "770e8400-e29b-41d4-a716-446655440000"
+  responses:
+    '200':
+      description: ステータス取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              orderId:
+                type: string
+                format: uuid
+                example: "770e8400-e29b-41d4-a716-446655440000"
+              status:
+                type: string
+                enum:
+                  - PENDING
+                  - CONFIRMED
+                  - PROCESSING
+                  - SHIPPED
+                  - DELIVERED
+                  - CANCELLED
+                  - RETURNED
+                example: "SHIPPED"
+              statusHistory:
+                type: array
+                description: ステータス変更履歴
+                items:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: "CONFIRMED"
+                    timestamp:
+                      type: string
+                      format: date-time
+                      example: "2025-11-12T10:05:00Z"
+                    note:
+                      type: string
+                      example: "注文が確定されました"
+              estimatedDelivery:
+                type: string
+                format: date
+                description: 配送予定日
+                example: "2025-11-15"
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

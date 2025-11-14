@@ -1,0 +1,55 @@
+post:
+  tags:
+    - Returns
+  summary: 返品承認
+  description: |
+    返品申請を承認します（管理者権限が必要）。
+  operationId: approveReturn
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: returnId
+      in: path
+      required: true
+      description: 返品ID
+      schema:
+        type: string
+        format: uuid
+      example: "gg0e8400-e29b-41d4-a716-446655440000"
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            notes:
+              type: string
+              description: 承認メモ
+              example: "返品を承認しました。返送手続きをお願いします"
+  responses:
+    '200':
+      description: 承認成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/return.yaml#/Return'
+    '400':
+      description: 承認できない返品
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "CANNOT_APPROVE_RETURN"
+            message: "この返品は承認できません（既に処理済み）"
+            timestamp: "2025-11-12T10:30:00Z"
+            path: "/v1/returns/gg0e8400-e29b-41d4-a716-446655440000/approve"
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

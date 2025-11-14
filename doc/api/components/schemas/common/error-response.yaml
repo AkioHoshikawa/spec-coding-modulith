@@ -1,0 +1,66 @@
+ErrorResponse:
+  type: object
+  required:
+    - code
+    - message
+    - timestamp
+    - path
+  properties:
+    code:
+      type: string
+      description: エラーコード
+      example: "ORDER_001"
+    message:
+      type: string
+      description: エラーメッセージ
+      example: "注文が見つかりません"
+    timestamp:
+      type: string
+      format: date-time
+      description: エラー発生時刻
+      example: "2025-11-12T10:30:00Z"
+    path:
+      type: string
+      description: リクエストパス
+      example: "/v1/orders/123"
+    details:
+      type: array
+      description: エラー詳細情報（バリデーションエラーなど）
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+            description: エラーが発生したフィールド
+            example: "email"
+          message:
+            type: string
+            description: フィールド固有のエラーメッセージ
+            example: "有効なメールアドレスを入力してください"
+          code:
+            type: string
+            description: フィールド固有のエラーコード
+            example: "INVALID_EMAIL_FORMAT"
+    traceId:
+      type: string
+      description: トレースID（デバッグ用）
+      example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+SuccessResponse:
+  type: object
+  required:
+    - success
+    - message
+  properties:
+    success:
+      type: boolean
+      description: 処理成功フラグ
+      example: true
+    message:
+      type: string
+      description: 成功メッセージ
+      example: "処理が正常に完了しました"
+    data:
+      type: object
+      description: レスポンスデータ（任意）
+      additionalProperties: true

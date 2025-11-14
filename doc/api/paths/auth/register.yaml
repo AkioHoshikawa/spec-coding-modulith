@@ -1,0 +1,80 @@
+post:
+  tags:
+    - Authentication
+  summary: ユーザー登録
+  description: |
+    新規ユーザーアカウントを作成します。
+    
+    登録後、確認メールが送信されます。
+  operationId: registerUser
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+            - firstName
+            - lastName
+          properties:
+            email:
+              type: string
+              format: email
+              description: メールアドレス
+              example: "user@example.com"
+            password:
+              type: string
+              format: password
+              minLength: 8
+              description: パスワード（8文字以上）
+              example: "SecurePass123!"
+            firstName:
+              type: string
+              description: 名
+              example: "太郎"
+            lastName:
+              type: string
+              description: 姓
+              example: "山田"
+            phoneNumber:
+              type: string
+              description: 電話番号（オプション）
+              example: "090-1234-5678"
+  responses:
+    '201':
+      description: ユーザー登録成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              userId:
+                type: string
+                format: uuid
+                description: ユーザーID
+                example: "550e8400-e29b-41d4-a716-446655440000"
+              email:
+                type: string
+                format: email
+                example: "user@example.com"
+              message:
+                type: string
+                example: "登録が完了しました。確認メールを送信しました"
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '409':
+      description: メールアドレスが既に使用されています
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "EMAIL_ALREADY_EXISTS"
+            message: "このメールアドレスは既に登録されています"
+            timestamp: "2025-11-12T10:30:00Z"
+            path: "/v1/auth/register"
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

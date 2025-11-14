@@ -1,0 +1,90 @@
+get:
+  tags:
+    - Users
+  summary: 住所一覧取得
+  description: |
+    ログイン中のユーザーの登録済み住所一覧を取得します。
+  operationId: getMyAddresses
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: 住所一覧取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              addresses:
+                type: array
+                items:
+                  $ref: '../../components/schemas/user.yaml#/Address'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'
+
+post:
+  tags:
+    - Users
+  summary: 住所登録
+  description: |
+    新しい配送先住所を登録します。
+  operationId: createAddress
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - firstName
+            - lastName
+            - postalCode
+            - prefecture
+            - city
+            - addressLine1
+          properties:
+            firstName:
+              type: string
+              example: "太郎"
+            lastName:
+              type: string
+              example: "山田"
+            phoneNumber:
+              type: string
+              example: "090-1234-5678"
+            postalCode:
+              type: string
+              example: "100-0001"
+            prefecture:
+              type: string
+              example: "東京都"
+            city:
+              type: string
+              example: "千代田区"
+            addressLine1:
+              type: string
+              example: "丸の内1-1-1"
+            addressLine2:
+              type: string
+              example: "丸の内ビル 10F"
+            isDefault:
+              type: boolean
+              description: デフォルト住所として設定するか
+              example: false
+  responses:
+    '201':
+      description: 住所登録成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/user.yaml#/Address'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

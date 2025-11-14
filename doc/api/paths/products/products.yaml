@@ -1,0 +1,60 @@
+get:
+  tags:
+    - Products
+  summary: 商品一覧取得
+  description: |
+    商品一覧を取得します。フィルタリング、ソート、ページネーションが可能です。
+  operationId: getProducts
+  security: []
+  parameters:
+    - $ref: '../../components/parameters/common.yaml#/PageParam'
+    - $ref: '../../components/parameters/common.yaml#/PageSizeParam'
+    - $ref: '../../components/parameters/common.yaml#/SortParam'
+    - name: category
+      in: query
+      description: カテゴリでフィルタ
+      required: false
+      schema:
+        type: string
+      example: "アウター"
+    - name: brand
+      in: query
+      description: ブランドでフィルタ
+      required: false
+      schema:
+        type: string
+      example: "Premium Fashion"
+    - name: minPrice
+      in: query
+      description: 最低価格
+      required: false
+      schema:
+        type: number
+        format: decimal
+      example: 10000
+    - name: maxPrice
+      in: query
+      description: 最高価格
+      required: false
+      schema:
+        type: number
+        format: decimal
+      example: 50000
+  responses:
+    '200':
+      description: 商品一覧取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '../../components/schemas/product.yaml#/Product'
+              meta:
+                $ref: '../../components/schemas/common/pagination.yaml#/PaginationMeta'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

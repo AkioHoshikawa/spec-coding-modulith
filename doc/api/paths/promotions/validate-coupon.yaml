@@ -1,0 +1,77 @@
+post:
+  tags:
+    - Promotions
+  summary: クーポン検証
+  description: |
+    クーポンコードが有効かどうかを検証します。
+  operationId: validateCoupon
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - couponCode
+          properties:
+            couponCode:
+              type: string
+              description: クーポンコード
+              example: "WELCOME10"
+            cartTotal:
+              type: number
+              format: decimal
+              description: カート合計金額
+              example: 10000
+  responses:
+    '200':
+      description: クーポン有効
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              valid:
+                type: boolean
+                description: クーポンが有効か
+                example: true
+              coupon:
+                $ref: '../../components/schemas/promotion.yaml#/Coupon'
+              promotion:
+                $ref: '../../components/schemas/promotion.yaml#/Promotion'
+              discountAmount:
+                type: number
+                format: decimal
+                description: 割引額
+                example: 1000
+              message:
+                type: string
+                example: "クーポンが適用されました"
+    '400':
+      description: クーポン無効
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              valid:
+                type: boolean
+                example: false
+              reason:
+                type: string
+                enum:
+                  - NOT_FOUND
+                  - EXPIRED
+                  - ALREADY_USED
+                  - MIN_PURCHASE_NOT_MET
+                  - NOT_APPLICABLE
+                example: "EXPIRED"
+              message:
+                type: string
+                example: "このクーポンは有効期限が切れています"
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

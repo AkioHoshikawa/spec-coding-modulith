@@ -1,0 +1,71 @@
+get:
+  tags:
+    - Users
+  summary: 自分のプロフィール取得
+  description: |
+    ログイン中のユーザーのプロフィール情報を取得します。
+  operationId: getMyProfile
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: プロフィール取得成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/user.yaml#/UserProfile'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'
+
+put:
+  tags:
+    - Users
+  summary: プロフィール更新
+  description: |
+    ログイン中のユーザーのプロフィール情報を更新します。
+  operationId: updateMyProfile
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            firstName:
+              type: string
+              example: "太郎"
+            lastName:
+              type: string
+              example: "山田"
+            phoneNumber:
+              type: string
+              example: "090-1234-5678"
+            preferences:
+              type: object
+              properties:
+                newsletter:
+                  type: boolean
+                  example: true
+                notifications:
+                  type: boolean
+                  example: true
+                language:
+                  type: string
+                  example: "ja"
+  responses:
+    '200':
+      description: プロフィール更新成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/user.yaml#/UserProfile'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

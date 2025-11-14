@@ -1,0 +1,199 @@
+Return:
+  type: object
+  required:
+    - returnId
+    - orderId
+    - type
+    - status
+    - reason
+  properties:
+    returnId:
+      type: string
+      format: uuid
+      description: 返品ID
+      example: "gg0e8400-e29b-41d4-a716-446655440000"
+    orderId:
+      type: string
+      format: uuid
+      description: 注文ID
+      example: "770e8400-e29b-41d4-a716-446655440000"
+    returnNumber:
+      type: string
+      description: 返品番号
+      example: "RET-20251112-0001"
+    type:
+      type: string
+      enum:
+        - RETURN
+        - EXCHANGE
+      description: 返品タイプ
+      example: "RETURN"
+    status:
+      type: string
+      enum:
+        - REQUESTED
+        - APPROVED
+        - REJECTED
+        - SHIPPED
+        - RECEIVED
+        - INSPECTED
+        - COMPLETED
+        - CANCELLED
+      description: 返品ステータス
+      example: "APPROVED"
+    reason:
+      type: string
+      description: 返品理由
+      example: "サイズが合わなかった"
+    items:
+      type: array
+      description: 返品商品
+      items:
+        type: object
+        required:
+          - orderItemId
+          - quantity
+        properties:
+          orderItemId:
+            type: string
+            format: uuid
+            description: 注文明細ID
+            example: "880e8400-e29b-41d4-a716-446655440000"
+          skuId:
+            type: string
+            example: "SKU-JACKET-M-BLACK"
+          productName:
+            type: string
+            example: "レザージャケット"
+          quantity:
+            type: integer
+            minimum: 1
+            example: 1
+          returnReason:
+            type: string
+            example: "サイズが小さい"
+    exchangeItems:
+      type: array
+      description: 交換先商品（交換の場合）
+      items:
+        type: object
+        properties:
+          skuId:
+            type: string
+            example: "SKU-JACKET-L-BLACK"
+          quantity:
+            type: integer
+            example: 1
+    refundAmount:
+      type: number
+      format: decimal
+      description: 返金額
+      example: 10500
+    refundMethod:
+      type: string
+      enum:
+        - ORIGINAL_PAYMENT
+        - BANK_TRANSFER
+        - STORE_CREDIT
+      description: 返金方法
+      example: "ORIGINAL_PAYMENT"
+    refundStatus:
+      type: string
+      enum:
+        - PENDING
+        - PROCESSING
+        - COMPLETED
+        - FAILED
+      description: 返金ステータス
+      example: "PENDING"
+    notes:
+      type: string
+      description: 備考
+      example: "商品を確認後、返金処理を行います"
+    returnShipmentId:
+      type: string
+      format: uuid
+      description: 返送出荷ID
+      example: "hh0e8400-e29b-41d4-a716-446655440000"
+    createdAt:
+      type: string
+      format: date-time
+      example: "2025-11-15T10:00:00Z"
+    updatedAt:
+      type: string
+      format: date-time
+      example: "2025-11-15T11:00:00Z"
+    approvedAt:
+      type: string
+      format: date-time
+      description: 承認日時
+      example: "2025-11-15T11:00:00Z"
+    completedAt:
+      type: string
+      format: date-time
+      description: 完了日時
+      example: "2025-11-20T15:00:00Z"
+
+CreateReturnRequest:
+  type: object
+  required:
+    - orderId
+    - type
+    - reason
+    - items
+  properties:
+    orderId:
+      type: string
+      format: uuid
+      description: 注文ID
+      example: "770e8400-e29b-41d4-a716-446655440000"
+    type:
+      type: string
+      enum:
+        - RETURN
+        - EXCHANGE
+      description: 返品タイプ
+      example: "RETURN"
+    reason:
+      type: string
+      description: 返品理由
+      example: "サイズが合わなかった"
+    items:
+      type: array
+      description: 返品商品
+      items:
+        type: object
+        required:
+          - orderItemId
+          - quantity
+        properties:
+          orderItemId:
+            type: string
+            format: uuid
+            example: "880e8400-e29b-41d4-a716-446655440000"
+          quantity:
+            type: integer
+            minimum: 1
+            example: 1
+          returnReason:
+            type: string
+            example: "サイズが小さい"
+    exchangeItems:
+      type: array
+      description: 交換先商品（交換の場合）
+      items:
+        type: object
+        required:
+          - skuId
+          - quantity
+        properties:
+          skuId:
+            type: string
+            example: "SKU-JACKET-L-BLACK"
+          quantity:
+            type: integer
+            example: 1
+    notes:
+      type: string
+      description: 備考
+      example: "できるだけ早く処理をお願いします"

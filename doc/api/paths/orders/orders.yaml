@@ -1,0 +1,100 @@
+get:
+  tags:
+    - Orders
+  summary: 注文一覧取得（管理者用）
+  description: |
+    すべての注文一覧を取得します（管理者権限が必要）。
+  operationId: getOrders
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/common.yaml#/PageParam'
+    - $ref: '../../components/parameters/common.yaml#/PageSizeParam'
+    - $ref: '../../components/parameters/common.yaml#/SortParam'
+    - name: status
+      in: query
+      description: 注文ステータスでフィルタ
+      required: false
+      schema:
+        type: string
+        enum:
+          - PENDING
+          - CONFIRMED
+          - PROCESSING
+          - SHIPPED
+          - DELIVERED
+          - CANCELLED
+          - RETURNED
+      example: "CONFIRMED"
+    - name: userId
+      in: query
+      description: ユーザーIDでフィルタ
+      required: false
+      schema:
+        type: string
+        format: uuid
+      example: "550e8400-e29b-41d4-a716-446655440000"
+  responses:
+    '200':
+      description: 注文一覧取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '../../components/schemas/order.yaml#/OrderSummary'
+              meta:
+                $ref: '../../components/schemas/common/pagination.yaml#/PaginationMeta'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'
+
+post:
+  tags:
+    - Orders
+  summary: 注文作成
+  description: |
+    カートから注文を作成します。在庫を引き当て、注文を確定します。
+  operationId: createOrder
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/order.yaml#/CreateOrderRequest'
+  responses:
+    '201':
+      description: 注文作成成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/order.yaml#/Order'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '409':
+      description: 在庫不足または競合
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "ORDER_CONFLICT"
+            message: "注文処理中にエラーが発生しました"
+            timestamp: "2025-11-12T10:30:00Z"
+            path: "/v1/orders"
+            details:
+              - field: "items[0].skuId"
+                message: "在庫が不足しています"
+                code: "INSUFFICIENT_STOCK"
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

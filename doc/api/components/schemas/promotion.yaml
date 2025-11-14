@@ -1,0 +1,149 @@
+Promotion:
+  type: object
+  required:
+    - promotionId
+    - name
+    - type
+    - discountType
+    - status
+    - startDate
+    - endDate
+  properties:
+    promotionId:
+      type: string
+      format: uuid
+      description: プロモーションID
+      example: "aa0e8400-e29b-41d4-a716-446655440000"
+    name:
+      type: string
+      description: プロモーション名
+      example: "ウィンターセール2025"
+    description:
+      type: string
+      description: 説明
+      example: "冬物商品が最大50%OFF"
+    type:
+      type: string
+      enum:
+        - SALE
+        - TIME_SALE
+        - COUPON
+        - PRE_ORDER
+        - BUNDLE
+      description: プロモーションタイプ
+      example: "SALE"
+    discountType:
+      type: string
+      enum:
+        - PERCENTAGE
+        - FIXED_AMOUNT
+        - FREE_SHIPPING
+      description: 割引タイプ
+      example: "PERCENTAGE"
+    discountValue:
+      type: number
+      format: decimal
+      description: 割引値（パーセンテージまたは固定額）
+      example: 20
+    minPurchaseAmount:
+      type: number
+      format: decimal
+      description: 最小購入金額
+      example: 5000
+    maxDiscountAmount:
+      type: number
+      format: decimal
+      description: 最大割引額
+      example: 10000
+    applicableProducts:
+      type: array
+      description: 適用対象商品ID（空の場合は全商品）
+      items:
+        type: string
+        format: uuid
+      example: []
+    applicableCategories:
+      type: array
+      description: 適用対象カテゴリ
+      items:
+        type: string
+      example: ["アウター", "ニット"]
+    status:
+      type: string
+      enum:
+        - DRAFT
+        - SCHEDULED
+        - ACTIVE
+        - EXPIRED
+        - CANCELLED
+      description: ステータス
+      example: "ACTIVE"
+    startDate:
+      type: string
+      format: date-time
+      description: 開始日時
+      example: "2025-12-01T00:00:00Z"
+    endDate:
+      type: string
+      format: date-time
+      description: 終了日時
+      example: "2025-12-31T23:59:59Z"
+    usageLimit:
+      type: integer
+      description: 使用回数制限
+      example: 1000
+    usageCount:
+      type: integer
+      description: 使用回数
+      example: 250
+    priority:
+      type: integer
+      description: 優先度（高い値が優先）
+      example: 10
+    createdAt:
+      type: string
+      format: date-time
+      example: "2025-11-01T00:00:00Z"
+
+Coupon:
+  type: object
+  required:
+    - couponCode
+    - promotionId
+    - status
+  properties:
+    couponCode:
+      type: string
+      description: クーポンコード
+      example: "WELCOME10"
+    promotionId:
+      type: string
+      format: uuid
+      description: プロモーションID
+      example: "aa0e8400-e29b-41d4-a716-446655440000"
+    userId:
+      type: string
+      format: uuid
+      description: 特定ユーザー専用の場合のユーザーID
+      example: "550e8400-e29b-41d4-a716-446655440000"
+    status:
+      type: string
+      enum:
+        - ACTIVE
+        - USED
+        - EXPIRED
+      description: ステータス
+      example: "ACTIVE"
+    usageLimit:
+      type: integer
+      description: 使用回数制限
+      example: 1
+    usageCount:
+      type: integer
+      description: 使用回数
+      example: 0
+    expiresAt:
+      type: string
+      format: date-time
+      description: 有効期限
+      example: "2025-12-31T23:59:59Z"
