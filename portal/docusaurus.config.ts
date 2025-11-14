@@ -8,8 +8,8 @@ import path from 'path';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Spec Driven Modulith',
-  tagline: 'Dinosaurs are cool',
+  title: 'Spec-Coding Modulith',
+  tagline: 'A showcase project of Spring Modulith with Spec Driven Development.',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -26,7 +26,7 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'example', // Usually your GitHub org/user name.
-  projectName: 'spec-driven-modulith', // Usually your repo name.
+  projectName: 'spec-coding-modulith', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -110,7 +110,7 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Spec Driven Modulith',
+      title: 'Spec-Coding Modulith',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
@@ -138,48 +138,8 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      links: [],
+      copyright: `Copyright © ${new Date().getFullYear()} Spec Driven Modulith. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
