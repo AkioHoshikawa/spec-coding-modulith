@@ -37,7 +37,6 @@ get:
                   - SHIPPED
                   - DELIVERED
                   - CANCELLED
-                  - RETURNED
                 example: "SHIPPED"
               statusHistory:
                 type: array

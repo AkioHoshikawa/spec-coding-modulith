@@ -12,8 +12,7 @@ doc/data/
 │   ├── user-tables.md          # ユーザー・認証ドメインのテーブル仕様
 │   ├── inventory-tables.md     # 商品・在庫ドメインのテーブル仕様
 │   ├── order-tables.md         # 注文ドメインのテーブル仕様
-│   ├── other-tables.md         # その他ドメインのテーブル仕様
-│   └── operations-guide.md     # 運用ガイド
+│   └── other-tables.md         # その他ドメインのテーブル仕様
 └── schema/                      # DDL定義
     ├── user.sql                # ユーザー・認証テーブル DDL
     ├── inventory.sql           # 商品・在庫テーブル DDL
@@ -24,60 +23,6 @@ doc/data/
     ├── payment.sql             # 決済テーブル DDL
     ├── audit.sql               # 監査ログテーブル DDL
     └── index-management.sql    # インデックス管理・最適化 DDL
-```
-
-## クイックスタート
-
-### 1. データベース初期化
-
-```bash
-# PostgreSQL 14以降を使用
-createdb fashion_ec
-
-# スキーマの作成（順序重要）
-psql -d fashion_ec -f schema/user.sql
-psql -d fashion_ec -f schema/inventory.sql
-psql -d fashion_ec -f schema/order.sql
-psql -d fashion_ec -f schema/promotion.sql
-psql -d fashion_ec -f schema/shipment.sql
-psql -d fashion_ec -f schema/return.sql
-psql -d fashion_ec -f schema/payment.sql
-psql -d fashion_ec -f schema/audit.sql
-
-# インデックス・最適化設定
-psql -d fashion_ec -f schema/index-management.sql
-```
-
-### 2. パーティション初期化
-
-```sql
--- 初回のみ実行：今後3ヶ月分のパーティションを作成
-SELECT create_monthly_partitions('orders', 3);
-SELECT create_monthly_partitions('order_status_history', 3);
-SELECT create_monthly_partitions('inventory_transactions', 3);
-SELECT create_monthly_partitions('user_auth_events', 3);
-SELECT create_monthly_partitions('audit_logs', 3);
-SELECT create_monthly_partitions('system_events', 3);
-SELECT create_monthly_partitions('payments', 3);
-SELECT create_monthly_partitions('payment_transactions', 3);
-SELECT create_monthly_partitions('shipments', 3);
-SELECT create_monthly_partitions('shipment_trackings', 3);
-SELECT create_monthly_partitions('returns', 3);
-SELECT create_monthly_partitions('coupon_usages', 3);
-```
-
-### 3. 拡張機能の有効化
-
-```sql
--- UUID生成
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-
--- スロークエリ監視
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
-
--- 全文検索（日本語対応）
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
 ```
 
 ## データモデル概要
@@ -197,48 +142,6 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 - 認証イベントは user_auth_events に記録
 - IP、UserAgent、リクエストIDを必ず記録
 
-## トラブルシューティング
-
-### よくある問題と解決策
-
-#### 1. スロークエリ
-
-```sql
--- 問題のクエリを特定
-SELECT * FROM slow_queries LIMIT 10;
-
--- 実行計画の確認
-EXPLAIN ANALYZE <your_query>;
-
--- インデックス追加を検討
-```
-
-#### 2. 在庫競合エラー
-
-```sql
--- 楽観ロックエラーの場合はリトライ
--- アプリケーション層で指数バックオフ実装
-```
-
-#### 3. ディスク容量不足
-
-```sql
--- 大きなテーブルを確認
-SELECT * FROM table_sizes LIMIT 10;
-
--- アーカイブ実行
--- operations-guide.md 参照
-```
-
-#### 4. 接続枯渇
-
-```sql
--- アクティブ接続数確認
-SELECT COUNT(*) FROM pg_stat_activity WHERE state = 'active';
-
--- 接続プーリング（PgBouncer等）の導入検討
-```
-
 ## 参考ドキュメント
 
 - [データモデル全体概要](model/data-model-overview.md)
@@ -247,52 +150,3 @@ SELECT COUNT(*) FROM pg_stat_activity WHERE state = 'active';
 - [注文テーブル仕様](model/order-tables.md)
 - [その他テーブル仕様](model/other-tables.md)
 - [運用ガイド](model/operations-guide.md)
-
-## メンテナンス
-
-### 定期実行タスク
-
-#### 日次
-```bash
-# バックアップ
-pg_dump -Fc fashion_ec > backup_$(date +%Y%m%d).dump
-
-# 統計情報更新
-psql -d fashion_ec -c "SELECT update_table_statistics();"
-```
-
-#### 月次
-```bash
-# パーティション作成（3ヶ月先）
-psql -d fashion_ec -c "SELECT create_monthly_partitions('orders', 3);"
-
-# アーカイブ実行（operations-guide.md参照）
-```
-
-#### 四半期
-```bash
-# 古いパーティション削除（アーカイブ後）
-psql -d fashion_ec -c "SELECT drop_old_partitions('orders', 12);"
-
-# インデックス再構築
-psql -d fashion_ec -c "SELECT * FROM reindex_bloated_indexes(0.3);"
-```
-
-## サポート
-
-問題が発生した場合は以下を確認してください：
-
-1. [運用ガイド](model/operations-guide.md)のトラブルシューティングセクション
-2. PostgreSQLログファイル
-3. アプリケーションログ
-4. 監視ダッシュボード（Grafana等）
-
-## ライセンス
-
-本ドキュメントは社内利用を目的としています。
-
----
-
-**最終更新日**: 2024年11月11日  
-**バージョン**: 1.0.0  
-**作成者**: データベースチーム

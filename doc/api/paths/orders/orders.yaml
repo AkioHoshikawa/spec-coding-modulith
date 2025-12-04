@@ -24,7 +24,6 @@ get:
           - SHIPPED
           - DELIVERED
           - CANCELLED
-          - RETURNED
       example: "CONFIRMED"
     - name: userId
       in: query

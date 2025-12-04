@@ -893,25 +893,22 @@ This application implements a **Fashion E-Commerce platform** with the following
 2. **Inventory Management** (`model.inventory`)
    - Stock level management
    - Inventory allocation and locking
-   - Inventory reservation (for pre-orders)
-   - Concurrency control (optimistic/pessimistic locking)
+   - Concurrency control (optimistic locking)
    - Related events: `ItemAllocate`, `ItemAllocateComplete`, `ItemAllocateFailed`
 
 3. **Promotion Management** (`model.promotion`)
-   - Campaign scheduling (sales, time-limited offers)
    - Coupon validation
-   - Discount calculation with priority rules
-   - Pre-order inventory allocation
+   - Discount calculation (Simple percentage discount)
+   - (Simplified from complex campaigns)
 
 4. **Shipment Management** (`model.shipment`)
    - Shipping instruction to 3PL
    - Delivery tracking
    - Shipment status updates
+   - (Simplified for this phase)
 
 5. **Return/Exchange Management** (`model.return`)
-   - Return request workflow
-   - Exchange request processing
-   - Refund processing
+   - (Removed from scope)
 
 6. **User Management** (`model.user`)
    - User registration and authentication
@@ -929,14 +926,10 @@ This application implements a **Fashion E-Commerce platform** with the following
 
 Refer to `/doc/business-rule/` for detailed business rules. Key rules include:
 
-- **BR-001**: Inventory allocation and locking (prevent overselling)
-- **BR-002**: Promotion priority rules
-- **BR-003**: Inventory concurrency control
-- **BR-004**: Return/exchange processing rules
-- **BR-005**: Order status transition rules
-- **BR-006**: Payment failure inventory rollback
-- **BR-007**: Cart retention period rules
-- **BR-008**: Prevent negative inventory
+- **BR-001**: 在庫管理 (Inventory Management)
+- **BR-002**: プロモーション (Promotion)
+- **BR-003**: 注文ライフサイクル (Order Lifecycle)
+- **BR-004**: カート管理 (Cart Management)
 
 ### Performance Requirements
 
@@ -961,7 +954,7 @@ Refer to `/doc/business-rule/` for detailed business rules. Key rules include:
 
 ### User Stories
 - User story templates: `/doc/user-story/`
-- Examples: `US-001` through `US-007`
+- Examples: `US-001` through `US-005`
 
 ### Project Documentation
 - Project overview: `/doc/project-overview.md`

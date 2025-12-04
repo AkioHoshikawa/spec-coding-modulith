@@ -35,7 +35,6 @@ Order:
         - SHIPPED
         - DELIVERED
         - CANCELLED
-        - RETURNED
       description: 注文ステータス
       example: "CONFIRMED"
     items:
@@ -208,7 +207,6 @@ OrderSummary:
         - SHIPPED
         - DELIVERED
         - CANCELLED
-        - RETURNED
       example: "DELIVERED"
     itemCount:
       type: integer
