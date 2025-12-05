@@ -1,4 +1,4 @@
-package com.example.modulith.poc.channel.web.controller;
+package com.example.modulith.poc.channel.web.controller.order;
 
 import com.example.modulith.poc.core.controller.EventCoordinatingController;
 import com.example.modulith.poc.core.event.EventBase;

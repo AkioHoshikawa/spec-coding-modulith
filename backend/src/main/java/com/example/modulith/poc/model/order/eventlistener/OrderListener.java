@@ -6,7 +6,6 @@ import com.example.modulith.poc.event.order.OrderCreate;
 import com.example.modulith.poc.event.order.OrderCreateComplete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.event.EventListener;
 import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.stereotype.Component;
 

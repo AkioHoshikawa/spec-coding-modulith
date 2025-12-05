@@ -319,7 +319,6 @@ Examples:
 - `model.order` - Order management
 - `model.inventory` - Inventory and stock management
 - `model.promotion` - Promotions, coupons, discounts
-- `model.shipment` - Shipping and logistics
 - `model.payment` - Payment processing
 - `model.user` - User account management
 - `model.product` - Product catalog

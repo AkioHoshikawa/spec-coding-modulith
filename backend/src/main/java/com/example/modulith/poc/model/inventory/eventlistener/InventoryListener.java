@@ -1,10 +1,9 @@
-package com.example.modulith.poc.model.inventory;
+package com.example.modulith.poc.model.inventory.eventlistener;
 
 import com.example.modulith.poc.event.inventory.ItemAllocate;
 import com.example.modulith.poc.event.inventory.ItemAllocateComplete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.event.EventListener;
 import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.stereotype.Component;
 
