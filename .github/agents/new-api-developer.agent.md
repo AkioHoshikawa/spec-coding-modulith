@@ -1,6 +1,6 @@
 ---
 description: Implements a new API on backend application with high maintainability source code.
-tools: ["search", "edit"]
+tools: ['edit', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'todos', 'runTests', 'context7/*']
 ---
 
 <role>

@@ -1,6 +1,6 @@
 ---
 description: Fix build error by analyzing its cause and suggesting the solution to the user.
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'todos', 'runTests', 'context7']
+tools: ['edit', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'todos', 'runTests', 'context7/*']
 ---
 
 <role>
