@@ -1,8 +1,6 @@
 @org.springframework.modulith.ApplicationModule(
-    displayName = "Order Domain"
+        displayName = "Order Domain"
 )
-@org.springframework.modulith.NamedInterface("api")
+@org.springframework.modulith.NamedInterface("order")
 package com.example.modulith.poc.model.order;
 
-import org.springframework.modulith.ApplicationModule;
-import org.springframework.modulith.NamedInterface;

@@ -3,131 +3,136 @@ Inventory:
   required:
     - skuId
     - totalQuantity
-    - reservedQuantity
     - availableQuantity
+    - lockedQuantity
   properties:
     skuId:
       type: string
       description: SKU ID
       example: "SKU-JACKET-M-BLACK"
-    warehouseId:
-      type: string
-      description: 倉庫ID
-      example: "WH-TOKYO-01"
     totalQuantity:
       type: integer
       minimum: 0
-      description: 総在庫数
+      description: 物理在庫数（総在庫数）
       example: 100
-    reservedQuantity:
-      type: integer
-      minimum: 0
-      description: 予約済み数量
-      example: 20
     availableQuantity:
       type: integer
       minimum: 0
-      description: 利用可能在庫数
-      example: 80
-    safetyStock:
+      description: |
+        利用可能在庫数（注文可能数）
+        計算式: totalQuantity - lockedQuantity - reservedQuantity
+      example: 85
+    lockedQuantity:
       type: integer
       minimum: 0
-      description: 安全在庫数
+      description: |
+        在庫ロック中の数量（注文確定処理中）
+        カート保持・注文処理中で一時的にロックされている数量
       example: 10
-    updatedAt:
+    reservedQuantity:
+      type: integer
+      minimum: 0
+      description: |
+        引当済み数量（確定注文分）
+        注文確定済みで出荷待ちの数量
+      example: 5
+    version:
+      type: integer
+      description: 楽観ロック用バージョン（@Version）
+      example: 12
+    lastStockUpdateAt:
       type: string
       format: date-time
-      description: 最終更新日時
-      example: "2025-11-12T10:30:00Z"
+      description: 最終在庫更新日時
+      example: "2025-12-08T10:30:00Z"
+    lastInventoryCheckAt:
+      type: string
+      format: date-time
+      description: 最終棚卸日時
+      example: "2025-12-01T09:00:00Z"
 
-InventoryReservation:
+InventoryLock:
   type: object
   required:
-    - reservationId
+    - lockId
     - skuId
     - quantity
+    - userId
     - status
+    - createdAt
+    - expiresAt
   properties:
-    reservationId:
+    lockId:
       type: string
       format: uuid
-      description: 予約ID
-      example: "dd0e8400-e29b-41d4-a716-446655440000"
+      description: 在庫ロックID
+      example: "cc2e8400-e29b-41d4-a716-446655440000"
     skuId:
       type: string
       description: SKU ID
       example: "SKU-JACKET-M-BLACK"
-    orderId:
-      type: string
-      format: uuid
-      description: 注文ID
-      example: "770e8400-e29b-41d4-a716-446655440000"
     quantity:
       type: integer
       minimum: 1
-      description: 予約数量
+      description: ロック数量
       example: 2
+    userId:
+      type: string
+      format: uuid
+      description: ユーザーID
+      example: "550e8400-e29b-41d4-a716-446655440000"
+    orderId:
+      type: string
+      format: uuid
+      description: 関連する注文ID（注文確定後）
+      example: "770e8400-e29b-41d4-a716-446655440000"
     status:
       type: string
       enum:
         - ACTIVE
-        - FULFILLED
-        - CANCELLED
         - EXPIRED
-      description: 予約ステータス
+        - RELEASED
+      description: |
+        ロックステータス
+        - ACTIVE: アクティブなロック
+        - EXPIRED: 期限切れ（自動解放待ち）
+        - RELEASED: 解放済み
       example: "ACTIVE"
+    lockType:
+      type: string
+      enum:
+        - CART
+        - ORDER
+      description: |
+        ロックタイプ
+        - CART: カート保持（15-30分）
+        - ORDER: 注文処理中（注文確定まで）
+      example: "ORDER"
+    createdAt:
+      type: string
+      format: date-time
+      description: ロック作成日時
+      example: "2025-12-08T10:00:00Z"
     expiresAt:
       type: string
       format: date-time
-      description: 予約有効期限
-      example: "2025-11-12T11:00:00Z"
-    createdAt:
+      description: |
+        ロック期限
+        - CARTタイプ: 15-30分後
+        - ORDERタイプ: 24時間後
+      example: "2025-12-09T10:00:00Z"
+    releasedAt:
       type: string
       format: date-time
-      example: "2025-11-12T10:00:00Z"
-
-InventoryAdjustment:
-  type: object
-  required:
-    - adjustmentId
-    - skuId
-    - quantity
-    - type
-    - reason
-  properties:
-    adjustmentId:
-      type: string
-      format: uuid
-      description: 調整ID
-      example: "ee0e8400-e29b-41d4-a716-446655440000"
-    skuId:
-      type: string
-      description: SKU ID
-      example: "SKU-JACKET-M-BLACK"
-    quantity:
-      type: integer
-      description: 調整数量（正または負）
-      example: 10
-    type:
+      description: ロック解放日時（解放済みの場合）
+      example: "2025-12-08T10:15:00Z"
+    releaseReason:
       type: string
       enum:
-        - STOCK_IN
-        - STOCK_OUT
-        - CORRECTION
-        - DAMAGED
-        - RETURN
-      description: 調整タイプ
-      example: "STOCK_IN"
-    reason:
-      type: string
-      description: 調整理由
-      example: "新規入荷"
-    performedBy:
-      type: string
-      format: uuid
-      description: 実行者ID
-      example: "550e8400-e29b-41d4-a716-446655440000"
-    createdAt:
-      type: string
-      format: date-time
-      example: "2025-11-12T10:00:00Z"
+        - ORDER_COMPLETED
+        - ORDER_CANCELLED
+        - PAYMENT_FAILED
+        - EXPIRED
+        - MANUAL
+      description: ロック解放理由
+      example: "ORDER_COMPLETED"

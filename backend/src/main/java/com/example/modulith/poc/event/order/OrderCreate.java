@@ -2,38 +2,113 @@ package com.example.modulith.poc.event.order;
 
 import com.example.modulith.poc.core.event.EventBase;
 import com.example.modulith.poc.core.event.EventHeader;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.UUID;
 
+/**
+ * 注文作成イベント
+ * <p>
+ * カートから注文を作成する際に発行されるイベント。
+ * 複数SKUの注文アイテム、配送先情報、支払い方法などを含む。
+ */
 public final class OrderCreate extends EventBase {
-    private final @NotBlank String itemId;
-    private final @Min(1) Integer amount;
-    private final @NotNull OffsetDateTime orderedDate;
+
+    /**
+     * 冪等性キー（重複リクエスト防止用）
+     */
+    private final @NotBlank String idempotencyKey;
+
+    /**
+     * 注文アイテムリスト
+     */
+    private final @NotNull
+    @NotEmpty
+    @Valid List<OrderItemData> items;
+
+    /**
+     * 配送先住所ID
+     */
+    private final @NotNull UUID shippingAddressId;
+
+    /**
+     * 請求先住所ID（省略時は配送先と同じ）
+     */
+    private final UUID billingAddressId;
+
+    /**
+     * 支払い方法
+     */
+    private final @NotBlank String paymentMethod;
+
+    /**
+     * クーポンコード
+     */
+    private final String couponCode;
+
+    /**
+     * 注文メモ
+     */
+    private final String notes;
 
     public OrderCreate(
             EventHeader header,
-            String itemId,
-            Integer amount,
-            OffsetDateTime orderedDate
+            String idempotencyKey,
+            List<OrderItemData> items,
+            UUID shippingAddressId,
+            UUID billingAddressId,
+            String paymentMethod,
+            String couponCode,
+            String notes
     ) {
         super(header);
-        this.itemId = itemId;
-        this.amount = amount;
-        this.orderedDate = orderedDate;
+        this.idempotencyKey = idempotencyKey;
+        this.items = items;
+        this.shippingAddressId = shippingAddressId;
+        this.billingAddressId = billingAddressId;
+        this.paymentMethod = paymentMethod;
+        this.couponCode = couponCode;
+        this.notes = notes;
     }
 
-    public String getItemId() {
-        return itemId;
+    public String getIdempotencyKey() {
+        return idempotencyKey;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public List<OrderItemData> getItems() {
+        return items;
     }
 
-    public OffsetDateTime getOrderedDate() {
-        return orderedDate;
+    public UUID getShippingAddressId() {
+        return shippingAddressId;
+    }
+
+    public UUID getBillingAddressId() {
+        return billingAddressId;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public String getCouponCode() {
+        return couponCode;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    /**
+     * 注文アイテムデータ
+     */
+    public record OrderItemData(
+            @NotNull UUID skuId,
+            @NotNull Integer quantity
+    ) {
     }
 }

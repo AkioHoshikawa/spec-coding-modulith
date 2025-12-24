@@ -49,7 +49,7 @@ CREATE TABLE orders (
     order_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     order_number VARCHAR(50) NOT NULL UNIQUE, -- 注文番号（業務キー、顧客向け表示用）
     user_id UUID NOT NULL REFERENCES users(user_id),
-    order_status VARCHAR(30) NOT NULL DEFAULT 'PENDING', -- PENDING, CONFIRMED, ALLOCATED, SHIPPED, DELIVERED, COMPLETED, CANCELLED, FAILED
+    order_status VARCHAR(30) NOT NULL DEFAULT 'PENDING', -- PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED
     payment_status VARCHAR(30) NOT NULL DEFAULT 'PENDING', -- PENDING, AUTHORIZED, CAPTURED, FAILED, REFUNDED
     
     -- 金額情報
@@ -72,8 +72,6 @@ CREATE TABLE orders (
     
     -- メタデータ
     customer_note TEXT,
-    is_gift BOOLEAN NOT NULL DEFAULT FALSE,
-    gift_message TEXT,
     ordered_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     confirmed_at TIMESTAMP WITH TIME ZONE,
     cancelled_at TIMESTAMP WITH TIME ZONE,
@@ -113,8 +111,6 @@ CREATE TABLE order_lines (
     unit_price DECIMAL(10, 2) NOT NULL,
     discount_amount DECIMAL(10, 2) NOT NULL DEFAULT 0,
     line_total DECIMAL(10, 2) NOT NULL,
-    allocated_location_id UUID REFERENCES inventory_locations(location_id),
-    allocated_at TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(order_id, line_number)
@@ -122,10 +118,8 @@ CREATE TABLE order_lines (
 
 CREATE INDEX idx_order_lines_order_id ON order_lines(order_id);
 CREATE INDEX idx_order_lines_sku_id ON order_lines(sku_id);
-CREATE INDEX idx_order_lines_allocated_location ON order_lines(allocated_location_id);
 
 COMMENT ON TABLE order_lines IS '注文明細。SKUごとの購入内容を保持';
-COMMENT ON COLUMN order_lines.allocated_location_id IS '在庫引当された拠点ID';
 
 -- ----------------------------------------------------------------------------
 -- order_status_history: 注文ステータス履歴
