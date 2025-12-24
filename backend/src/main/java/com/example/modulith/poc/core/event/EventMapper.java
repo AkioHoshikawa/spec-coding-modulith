@@ -10,7 +10,8 @@ public class EventMapper {
             T target = targetClass.getDeclaredConstructor().newInstance();
             BeanUtils.copyProperties(source, target);
             return target;
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
     }

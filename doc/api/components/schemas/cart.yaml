@@ -62,7 +62,7 @@ Cart:
     expiresAt:
       type: string
       format: date-time
-      description: カート有効期限
+      description: カート有効期限（最終更新から7日間）
       example: "2025-11-19T09:00:00Z"
 
 CartItem:

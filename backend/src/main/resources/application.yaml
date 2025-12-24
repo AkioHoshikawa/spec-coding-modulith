@@ -9,7 +9,7 @@ spring:
   datasource:
     driverClassName: org.h2.Driver
     password: ''
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;INIT=RUNSCRIPT FROM 'classpath:init-h2.sql'
     username: sa
   h2:
     console:

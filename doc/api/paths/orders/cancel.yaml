@@ -4,6 +4,15 @@ post:
   summary: 注文キャンセル
   description: |
     注文をキャンセルします。出荷前の注文のみキャンセル可能です。
+    
+    ## 在庫処理
+    - 注文に紐づく在庫ロックを即時解放
+    - 在庫数を復元（inventory_transactionsに記録）
+    - 解放理由「注文キャンセル」として記録
+    
+    ## 補償トランザクション
+    - Sagaパターンに基づく補償処理を実行
+    - 決済済みの場合は返金処理も連動
   operationId: cancelOrder
   security:
     - bearerAuth: []

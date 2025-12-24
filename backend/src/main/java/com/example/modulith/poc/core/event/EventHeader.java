@@ -1,6 +1,7 @@
 package com.example.modulith.poc.core.event;
 
 import jakarta.persistence.Embeddable;
+
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -11,7 +12,8 @@ public class EventHeader {
     private String userId;
     private OffsetDateTime createdDate;
 
-    public EventHeader() {}
+    public EventHeader() {
+    }
 
     public EventHeader(boolean error, String txId, String userId, OffsetDateTime createdDate) {
         this.error = error;
@@ -36,15 +38,35 @@ public class EventHeader {
         this(error, txId, userId, OffsetDateTime.now());
     }
 
-    public boolean isError() { return error; }
-    public void setError(boolean error) { this.error = error; }
+    public boolean isError() {
+        return error;
+    }
 
-    public String getTxId() { return txId; }
-    public void setTxId(String txId) { this.txId = txId; }
+    public void setError(boolean error) {
+        this.error = error;
+    }
 
-    public String getUserId() { return userId; }
-    public void setUserId(String userId) { this.userId = userId; }
+    public String getTxId() {
+        return txId;
+    }
 
-    public OffsetDateTime getCreatedDate() { return createdDate; }
-    public void setCreatedDate(OffsetDateTime createdDate) { this.createdDate = createdDate; }
+    public void setTxId(String txId) {
+        this.txId = txId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public OffsetDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(OffsetDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
 }

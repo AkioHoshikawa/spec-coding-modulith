@@ -55,18 +55,13 @@ put:
         schema:
           type: object
           required:
-            - totalQuantity
+            - quantity
           properties:
-            totalQuantity:
+            quantity:
               type: integer
               minimum: 0
-              description: 総在庫数
+              description: 在庫数
               example: 100
-            safetyStock:
-              type: integer
-              minimum: 0
-              description: 安全在庫数
-              example: 10
   responses:
     '200':
       description: 更新成功
