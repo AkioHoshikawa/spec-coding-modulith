@@ -1,4 +1,4 @@
-# 要件ドキュメント更新プロセス
+# 要件ドキュメント更新
 
 ## Target
 以下のディレクトリに格納されているドキュメントを更新する場合に利用するプロセス:
@@ -8,6 +8,14 @@ doc/
 ├── business-rule/
 └── user-story/
 ```
+
+## Prompt Example
+
+```text
+[変更内容をPromptとして記載する]
+```
+
+- `req-doc-update` agent を利用する
 
 ## Phase 1: Change Analysis
 

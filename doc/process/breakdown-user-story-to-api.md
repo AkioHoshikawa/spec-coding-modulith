@@ -1,4 +1,4 @@
-# User StoryからAPI設計に分解するプロセス
+# User StoryからAPI設計に分解する
 
 ## Target
 
@@ -10,6 +10,7 @@ User Storyの実装に必要なAPIを特定する。調査の結果、既存のA
 #file:US-001_注文確定時の在庫ロック.md の内容を読み込み、このユーザストーリーを実現するために必要なAPIを列挙してください。
 ```
 
+- `breakdown-user-story-to-api` agent を利用する
 - 実装したいユーザストーリーの定義ファイルを指定する
 
 ## Phase 1: User Story Analysis
@@ -38,7 +39,7 @@ User Storyの実装に必要なAPIを特定する。調査の結果、既存のA
 - [ ] Business Ruleに沿ったビジネスロジックを作成している
 - [ ] データモデルは `doc/data` フォルダに配置されている設計書と平仄が取れている
 - [ ] データモデルに合わせてInput Validationが実装されるTaskになっている
-- [ ] `backend/AGENTS.md`に記載されているルールに準拠した設計修正案になっている
+- [ ] `doc/architecture/backend-dev-guide.md`に記載されているルールに準拠した設計修正案になっている
 
 ## Phase 2: Update API doc
 
@@ -61,5 +62,5 @@ User Storyの実装に必要なAPIを特定する。調査の結果、既存のA
 - [ ] Business Ruleに沿ったビジネスロジックを作成している
 - [ ] データモデルは `doc/data` フォルダに配置されている設計書と平仄が取れている
 - [ ] データモデルに合わせてInput Validationが実装できるOpenAPI定義となっている
-- [ ] `backend/AGENTS.md`に記載されているルールに準拠した設計修正案になっている
+- [ ] `doc/architecture/backend-dev-guide.md`に記載されているルールに準拠した設計修正案になっている
 - [ ] OpenAPI定義以外の設計書の修正を行なっていない

@@ -84,6 +84,16 @@ const config: Config = {
       },
     ],
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'process',
+        path: path.resolve(__dirname, '../doc/process'),
+        include: ['**/*.{md,mdx}'],
+        exclude: ['**/*_TEMPLATE.md'],
+        routeBasePath: 'docs/process',
+      },
+    ],
+    [
       'docusaurus-plugin-openapi-docs',
       {
         id: "api",
@@ -127,6 +137,10 @@ const config: Config = {
         {
           to: 'docs/user-story',
           label: 'User Story',
+        },
+        {
+          to: 'docs/process',
+          label: 'Process',
         },
         {
           type: 'docSidebar',
