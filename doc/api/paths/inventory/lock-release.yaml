@@ -1,0 +1,66 @@
+post:
+  tags:
+    - Inventory
+  summary: 在庫ロック解放（管理者用）
+  description: |
+    指定された在庫ロックを手動で解放します（管理者権限が必要）。
+    
+    ## 用途
+    - 緊急対応: システム障害時の手動解放
+    - デバッグ: テスト環境での強制解放
+    
+    ## 注意事項
+    - 注文確定済みのロックは解放できません（409エラー）
+    - 解放理由は必ず記録してください
+  operationId: releaseInventoryLock
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: lockId
+      in: path
+      required: true
+      description: 在庫ロックID
+      schema:
+        type: string
+        format: uuid
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - reason
+          properties:
+            reason:
+              type: string
+              description: 解放理由（監査ログに記録）
+              example: "システム障害対応のため手動解放"
+  responses:
+    '200':
+      description: 解放成功
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/inventory.yaml#/InventoryLock'
+    '400':
+      $ref: '../../components/responses/common.yaml#/BadRequest'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '404':
+      $ref: '../../components/responses/common.yaml#/NotFound'
+    '409':
+      description: 解放不可（注文確定済み）
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+          example:
+            code: "LOCK_RELEASE_CONFLICT"
+            message: "この在庫ロックは注文確定済みのため解放できません"
+            timestamp: "2025-12-08T10:30:00Z"
+            path: "/v1/inventory/locks/cc2e8400-e29b-41d4-a716-446655440000/release"
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

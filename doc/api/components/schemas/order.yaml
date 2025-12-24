@@ -181,6 +181,13 @@ OrderItem:
       format: uuid
       description: 適用されたプロモーションID
       example: "aa0e8400-e29b-41d4-a716-446655440000"
+    inventoryLockId:
+      type: string
+      format: uuid
+      description: |
+        在庫ロックID。注文確定時に発行される在庫確保の追跡用ID。
+        在庫トランザクション履歴との紐付けに使用。
+      example: "bb1e8400-e29b-41d4-a716-446655440000"
 
 OrderSummary:
   type: object

@@ -1,0 +1,62 @@
+get:
+  tags:
+    - Inventory
+  summary: 在庫ロック一覧取得（管理者用）
+  description: |
+    現在アクティブな在庫ロックの一覧を取得します（管理者権限が必要）。
+    
+    ## 用途
+    - デバッグ: 在庫ロックの状態監視
+    - 運用監視: 期限切れロックの検出
+    - トラブルシューティング: オーバーセル調査
+  operationId: getInventoryLocks
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: '../../components/parameters/common.yaml#/PageParam'
+    - $ref: '../../components/parameters/common.yaml#/PageSizeParam'
+    - name: skuId
+      in: query
+      description: SKU IDでフィルタ
+      required: false
+      schema:
+        type: string
+      example: "SKU-JACKET-M-BLACK"
+    - name: status
+      in: query
+      description: ロックステータスでフィルタ
+      required: false
+      schema:
+        type: string
+        enum:
+          - ACTIVE
+          - EXPIRED
+          - RELEASED
+      example: "ACTIVE"
+    - name: userId
+      in: query
+      description: ユーザーIDでフィルタ
+      required: false
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: 在庫ロック一覧取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '../../components/schemas/inventory.yaml#/InventoryLock'
+              meta:
+                $ref: '../../components/schemas/common/pagination.yaml#/PaginationMeta'
+    '401':
+      $ref: '../../components/responses/common.yaml#/Unauthorized'
+    '403':
+      $ref: '../../components/responses/common.yaml#/Forbidden'
+    '500':
+      $ref: '../../components/responses/common.yaml#/InternalServerError'

@@ -80,6 +80,9 @@ public class OrderEntity {
     @Column(name = "shipping_address_line2")
     private String shippingAddressLine2;
 
+    @Column(name = "payment_method", length = 50)
+    private String paymentMethod;
+
     @Column(name = "customer_note", columnDefinition = "TEXT")
     private String customerNote;
 
@@ -270,6 +273,14 @@ public class OrderEntity {
 
     public void setShippingAddressLine2(String shippingAddressLine2) {
         this.shippingAddressLine2 = shippingAddressLine2;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public String getCustomerNote() {

@@ -4,16 +4,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.modulith.core.ApplicationModules;
 
 /**
- * Advanced architectural verification tests.
- * These tests verify architectural patterns and best practices.
+ * 各モジュールの依存性がアーキテクチャの設計に従っていることをテストする
  */
-class ArchitecturalVerificationTests {
+class ModuleDependencyTest {
 
     private final ApplicationModules modules = ApplicationModules.of(PocApplication.class);
 
     @Test
     void shouldVerifyWithDefaultOptions() {
-        // Verify with default verification options
         modules.verify();
     }
 }

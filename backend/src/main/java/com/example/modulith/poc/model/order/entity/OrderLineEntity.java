@@ -61,6 +61,9 @@ public class OrderLineEntity {
     @Column(name = "line_total", nullable = false, precision = 10, scale = 2)
     private BigDecimal lineTotal;
 
+    @Column(name = "inventory_lock_id")
+    private UUID inventoryLockId;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 
@@ -173,6 +176,14 @@ public class OrderLineEntity {
 
     public void setLineTotal(BigDecimal lineTotal) {
         this.lineTotal = lineTotal;
+    }
+
+    public UUID getInventoryLockId() {
+        return inventoryLockId;
+    }
+
+    public void setInventoryLockId(UUID inventoryLockId) {
+        this.inventoryLockId = inventoryLockId;
     }
 
     public OffsetDateTime getCreatedAt() {

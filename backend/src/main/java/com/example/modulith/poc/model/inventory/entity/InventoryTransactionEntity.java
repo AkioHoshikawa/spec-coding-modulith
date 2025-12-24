@@ -13,6 +13,12 @@ import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * 在庫トランザクションエンティティ
+ * <p>
+ * すべての在庫増減を記録する。
+ * 監査証跡として在庫変更の履歴を保持する。
+ */
 @Entity
 @Table(name = "inventory_transactions")
 public class InventoryTransactionEntity {

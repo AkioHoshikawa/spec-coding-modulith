@@ -60,9 +60,32 @@ post:
   summary: 注文作成
   description: |
     カートから注文を作成します。在庫を引き当て、注文を確定します。
+    
+    ## パフォーマンス要件
+    - P99レスポンスタイム: 2秒以内（ピーク時秒間1000リクエスト）
+    
+    ## 冪等性保証
+    - Idempotency-Keyヘッダーを使用して重複リクエストを防止
+    - 同一キーでの再送は前回のレスポンスを返却（24時間有効）
+    
+    ## 在庫ロック処理
+    - 注文確定時にSKU単位で在庫をロック
+    - 在庫ロックIDを発行し、OrderItemに記録
+    - 楽観ロック（@Version）による同時実行制御
   operationId: createOrder
   security:
     - bearerAuth: []
+  parameters:
+    - name: Idempotency-Key
+      in: header
+      required: true
+      description: |
+        冪等性キー（UUID v4推奨）。同一キーでの再送時は前回の結果を返却。
+        有効期限は24時間。
+      schema:
+        type: string
+        format: uuid
+      example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
   requestBody:
     required: true
     content:
@@ -72,6 +95,12 @@ post:
   responses:
     '201':
       description: 注文作成成功
+      headers:
+        Idempotency-Key:
+          description: リクエストで送信された冪等性キー
+          schema:
+            type: string
+            format: uuid
       content:
         application/json:
           schema:
@@ -85,15 +114,80 @@ post:
       content:
         application/json:
           schema:
+            allOf:
+              - $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
+              - type: object
+                properties:
+                  details:
+                    type: array
+                    description: 在庫不足の詳細情報（複数SKU対応）
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                          description: エラーが発生したフィールド
+                          example: "items[0].skuId"
+                        skuId:
+                          type: string
+                          description: 在庫不足のSKU ID
+                          example: "SKU-JACKET-M-BLACK"
+                        message:
+                          type: string
+                          description: エラーメッセージ
+                          example: "在庫が不足しています（要求: 5, 利用可能: 2）"
+                        code:
+                          type: string
+                          enum:
+                            - INSUFFICIENT_STOCK
+                            - OUT_OF_STOCK
+                          example: "INSUFFICIENT_STOCK"
+                        requestedQuantity:
+                          type: integer
+                          description: 要求数量
+                          example: 5
+                        availableQuantity:
+                          type: integer
+                          description: 利用可能数量
+                          example: 2
+          examples:
+            insufficientStock:
+              summary: 在庫不足（複数SKU）
+              value:
+                code: "ORDER_CONFLICT"
+                message: "注文処理中にエラーが発生しました"
+                timestamp: "2025-12-08T10:30:00Z"
+                path: "/v1/orders"
+                details:
+                  - field: "items[0].skuId"
+                    skuId: "SKU-JACKET-M-BLACK"
+                    message: "在庫が不足しています（要求: 5, 利用可能: 2）"
+                    code: "INSUFFICIENT_STOCK"
+                    requestedQuantity: 5
+                    availableQuantity: 2
+                  - field: "items[1].skuId"
+                    skuId: "SKU-PANTS-L-NAVY"
+                    message: "在庫切れです"
+                    code: "OUT_OF_STOCK"
+                    requestedQuantity: 1
+                    availableQuantity: 0
+            optimisticLockFailure:
+              summary: 楽観ロック競合
+              value:
+                code: "OPTIMISTIC_LOCK_FAILURE"
+                message: "同時に注文が処理されたため、在庫を確保できませんでした。再度お試しください。"
+                timestamp: "2025-12-08T10:30:00Z"
+                path: "/v1/orders"
+    '422':
+      description: 冪等性キーが既に使用済み（処理中）
+      content:
+        application/json:
+          schema:
             $ref: '../../components/schemas/common/error-response.yaml#/ErrorResponse'
           example:
-            code: "ORDER_CONFLICT"
-            message: "注文処理中にエラーが発生しました"
-            timestamp: "2025-11-12T10:30:00Z"
+            code: "IDEMPOTENCY_KEY_IN_USE"
+            message: "この冪等性キーは現在処理中です。しばらくお待ちください。"
+            timestamp: "2025-12-08T10:30:00Z"
             path: "/v1/orders"
-            details:
-              - field: "items[0].skuId"
-                message: "在庫が不足しています"
-                code: "INSUFFICIENT_STOCK"
     '500':
       $ref: '../../components/responses/common.yaml#/InternalServerError'

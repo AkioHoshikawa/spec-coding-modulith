@@ -11,6 +11,12 @@ import jakarta.persistence.Version;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * 在庫エンティティ
+ * <p>
+ * SKU単位の在庫数量を管理する。
+ * 楽観ロック（@Version）により同時実行制御を実現する。
+ */
 @Entity
 @Table(name = "inventory")
 public class InventoryEntity {
@@ -81,5 +87,30 @@ public class InventoryEntity {
 
     public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    /**
+     * 在庫を減少させる
+     *
+     * @param amount 減少量
+     * @throws IllegalArgumentException 在庫が不足している場合
+     */
+    public void decreaseQuantity(Integer amount) {
+        if (this.quantity < amount) {
+            throw new IllegalArgumentException(
+                    String.format("在庫不足: SKU=%s, 要求数=%d, 利用可能数=%d",
+                            skuId, amount, quantity)
+            );
+        }
+        this.quantity -= amount;
+    }
+
+    /**
+     * 在庫を増加させる
+     *
+     * @param amount 増加量
+     */
+    public void increaseQuantity(Integer amount) {
+        this.quantity += amount;
     }
 }

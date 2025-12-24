@@ -116,6 +116,10 @@ paths:
   # Inventory endpoints (Admin)
   /inventory/skus/{skuId}:
     $ref: './paths/inventory/sku-inventory.yaml'
+  /inventory/locks:
+    $ref: './paths/inventory/locks.yaml'
+  /inventory/locks/{lockId}/release:
+    $ref: './paths/inventory/lock-release.yaml'
   
   # Promotion endpoints
   /promotions/validate-coupon:
